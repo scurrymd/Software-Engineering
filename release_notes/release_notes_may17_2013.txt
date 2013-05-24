@@ -4,3 +4,11 @@ May 17 2013:
 
 o added Software requirements document
 o added release notes document
+
+
+Comments:
+
+1. Change app name to a single word that reflects the functionality or use of the app. 
+2. Rewrite objectives in the requirements documents as discussed during our lab meeting
+4. Rewrite "statement of functionality".
+3. Research on other apps that are similar to yours and update the requirements document under "replacement of legacy systems"
