@@ -4,5 +4,9 @@
     <string name="app_name">UC Schedule</string>
     <string name="action_settings">Settings</string>
     <string name="hello_world">Hello world!</string>
+    <string name="strLogin">Login to your UC Account</string>
+    <string name="strUsername">Username (6+2)</string>
+    <string name="strPassword">Password</string>
+    <string name="strLoginBtn">Login</string>
 
 </resources>
