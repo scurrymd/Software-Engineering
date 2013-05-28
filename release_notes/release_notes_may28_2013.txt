@@ -1,0 +1,14 @@
+UC Schedule:
+
+May 28 2013:
+
+
+
+• Changed app name to "UC Schedule"
+• Updated "Objectives" to fill a need.
+• Updated "State of Functionality".
+• Updated "Replacement for Legacy System".
+
+Comment:
+
+•
