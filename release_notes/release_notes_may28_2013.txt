@@ -9,6 +9,24 @@ May 28 2013:
 • Updated "State of Functionality".
 • Updated "Replacement for Legacy System".
 
-Comment:
+Comments:
 
-•
+Requirements document:
+1. Explore features of UCMobile App and update "replacement of legacy systems" as discussed (your app as a possible integrated feature in UCMobile app)
+2. Include a description of UCIT's role and resources that you anticipate to use, under the "Business process" section
+3. Include an Appendix with information about API and other resources that you collect (example: API for UC database)
+4. Include an Appendix with a list of contact information from UCIT and other external collaborators.
+5. Update the table of contents
+
+Specification document:
+1. In the use-case diagram, the UC database could be another possible actor. Use appropriate syntax (correct arrows, <include>, <extend> as neccessary) to associate different use cases
+
+Next steps (Implementation):
+1. Start working on creating a user interface for various activities. Besides the login screen, what other activities do you need? 
+2. Research on Possible API for using the UC database
+
+Misc:
+1. The App name may still need to be changed into a "single word". Something creative! We don't need it right away but keep thinking, and update it whenever you have one.
+
+
+Good work on getting in touch with UCIT. Building relationships with collaborators is key to solving engineering problems!
