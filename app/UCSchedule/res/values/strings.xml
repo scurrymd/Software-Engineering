@@ -8,5 +8,11 @@
     <string name="strUsername">Username (6+2)</string>
     <string name="strPassword">Password</string>
     <string name="strLoginBtn">Login</string>
+    <string name="strCalendar">Calendar</string>
+    <string name="strBack">Back</string>
+    <string name="strTitle">Enter Title:</string>
+    <string name="strDate">Enter Date:</string>
+    <string name="strStartTime">Start Time:</string>
+    <string name="strEndTime">End Time:</string>
 
 </resources>
