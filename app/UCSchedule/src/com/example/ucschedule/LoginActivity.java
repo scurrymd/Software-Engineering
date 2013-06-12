@@ -7,6 +7,11 @@ import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
 
+/**
+ * Class that will display a login screen to log into the UC database.
+ * @author Matt
+ *	
+ */
 public class LoginActivity extends Activity {
 
 	@Override
