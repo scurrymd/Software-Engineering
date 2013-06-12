@@ -1,11 +1,20 @@
 package com.example.ucschedule;
 
+import java.util.GregorianCalendar;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.provider.CalendarContract;
+import android.provider.CalendarContract.Events;
 import android.view.View;
 import android.widget.Button;
 
+/**
+ * Temporary activity used to access the event functions in the calendar.
+ * @author Matt
+ * 
+ */
 public class EventTestActivity extends Activity {
 
 	@Override

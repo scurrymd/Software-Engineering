@@ -1,12 +1,18 @@
 package com.example.ucschedule;
 
 import android.os.Bundle;
+import android.provider.CalendarContract.Events;
+import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.app.Activity;
 import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
-
+/**
+ * Main activity class. This contains the main menu of the application.
+ * @author Matt
+ *	
+ */
 public class MainActivity extends Activity {
 
 	@Override
@@ -41,7 +47,7 @@ public class MainActivity extends Activity {
 			}
 		});
 		
-goToAddEvent.setOnClickListener(new View.OnClickListener() {
+		goToAddEvent.setOnClickListener(new View.OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {
@@ -49,9 +55,26 @@ goToAddEvent.setOnClickListener(new View.OnClickListener() {
 				/**
 				 *  Function to go to the add Event test page
 				 */
-		 
+				
+				/*
 				Intent n = new Intent(MainActivity.this,EventTestActivity.class);
 			 	startActivity(n);
+			 	*/
+				
+				/*
+				 * Intent used to access the add event activity in the calendar
+				 */
+				try{
+				 	Intent intent = new Intent(Intent.ACTION_INSERT);
+					intent.setType("vnd.android.cursor.item/event");
+					intent.putExtra(Events.TITLE, "");
+		
+					startActivity(intent);
+				}
+				catch (ActivityNotFoundException activityNotFound){
+					
+				}
+
 			}
 		});
 		
