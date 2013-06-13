@@ -1,0 +1,13 @@
+UC Schedule:
+
+June 12 2013:
+
+
+
+• Added calendar intent
+• Added "add event" functionality (temporary)
+• Updated Software requirements and specs doc.
+• Added hub page navigation
+
+Comments:
+
