@@ -11,3 +11,15 @@ June 12 2013:
 
 Comments:
 
+
+Requirements Document:
+1.What does "The development cycle will consist of multiple phases depending what deadlines are given" mean (under scope)? Include what those phases are, various tasks involved and milestones.
+2. "This app will possibly be integrated into the UC Mobile app" What is UC Mobile app? What are its capablities? How does your app fit in to UC Mobile app?
+
+Next steps:
+1. You should get access to the UC's student database ASAP! It's going to be hard to deliver the project on-time, if you don't get this resource by the next release.
+2. Write unit test cases for modules you have implemented so far (use user stories to identify test scenarios).Specifically, Write unit tests for the layout issues that you are currently facing.
+3. Henceforth, Write unit test cases before you implement a module/scenario. 
+4. Document/Include comments to .xml files. Continue documenting java source files. 
+
+Keep up the good work. Meet frequently, brainstorm and code as a TEAM!
