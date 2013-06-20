@@ -9,31 +9,29 @@
     tools:context=".MainActivity" >
 
     <Button
-        android:id="@+id/btnGoToLogin"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_centerVertical="true"
-        android:layout_marginLeft="101dp"
-        android:text="@string/strLoginBtn" />
-
-    <Button
         android:id="@+id/btnGoToCalendar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/btnGoToLogin"
-        android:layout_alignBottom="@+id/btnGoToLogin"
-        android:layout_alignParentRight="true"
-        android:layout_marginRight="78dp"
+        android:layout_below="@+id/btnGoToAddEvent"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
         android:text="@string/strCalendar" />
 
     <Button
         android:id="@+id/btnGoToAddEvent"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/btnGoToLogin"
-        android:layout_alignBottom="@+id/btnGoToLogin"
         android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
         android:text="add event (test)" />
+
+    <Button
+        android:id="@+id/btnGoToLogin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/btnGoToAddEvent"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="63dp"
+        android:text="@string/strLoginBtn" />
 
 </RelativeLayout>
