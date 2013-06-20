@@ -1,0 +1,10 @@
+UC Schedule:
+
+June 25 2013:
+
+
+
+• Fixed MainActivity UI bugs.
+
+Comments:
+
