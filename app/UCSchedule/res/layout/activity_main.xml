@@ -8,6 +8,7 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".MainActivity" >
 
+    <!-- Button to go to the calendar -->
     <Button
         android:id="@+id/btnGoToCalendar"
         android:layout_width="wrap_content"
@@ -17,6 +18,7 @@
         android:layout_marginTop="20dp"
         android:text="@string/strCalendar" />
 
+    <!-- Button to go to the add event test page -->
     <Button
         android:id="@+id/btnGoToAddEvent"
         android:layout_width="wrap_content"
@@ -24,7 +26,8 @@
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
         android:text="add event (test)" />
-
+    
+	<!-- Button to go to the login screen -->
     <Button
         android:id="@+id/btnGoToLogin"
         android:layout_width="wrap_content"

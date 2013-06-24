@@ -8,6 +8,8 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".LoginActivity" >
 
+    <!-- Text field used to input the password of the user.
+    	 It has the properties of a password text field which makes the text appear as private.-->
     <EditText
         android:id="@+id/etPassword"
         android:layout_width="wrap_content"
@@ -21,6 +23,7 @@
         <requestFocus />
     </EditText>
 
+    <!-- Button used to login to the UC database with the user's  credentials. -->
     <Button
         android:id="@+id/btnLogin"
         android:layout_width="wrap_content"
@@ -30,6 +33,7 @@
         android:layout_marginTop="34dp"
         android:text="@string/strLoginBtn" />
 
+    <!-- Displays the text to prompt the user to fill in their credentials. -->
     <TextView
         android:id="@+id/tvLogin"
         android:layout_width="wrap_content"
@@ -40,6 +44,7 @@
         android:text="@string/strLogin"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
+    <!-- Text field for the user's username. -->
     <EditText
         android:id="@+id/etUsername"
         android:layout_width="wrap_content"
@@ -50,6 +55,7 @@
         android:ems="10"
         android:hint="@string/strUsername" />
 
+    <!-- Button used to go to back to the main page. -->
     <Button
         android:id="@+id/btnGoToMain"
         style="?android:attr/buttonStyleSmall"
