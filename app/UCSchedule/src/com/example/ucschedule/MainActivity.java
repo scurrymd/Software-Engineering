@@ -126,7 +126,6 @@ public class MainActivity extends Activity {
 	 * @param endMinute
 	 * @param timeZone
 	 * @param title
-	 * @param description
 	 * @return long eventID
 	 */
 	public long addEvent(
@@ -143,8 +142,7 @@ public class MainActivity extends Activity {
 			int endHour,
 			int endMinute,
 			String timeZone, 
-			String title, 
-			String description)
+			String title)
 	{
 		allDayEvent = false;
 		long startMillis = 0; 
@@ -157,8 +155,22 @@ public class MainActivity extends Activity {
 		endTime.set(endYear, endMonth, endDay, endHour, endMinute);
 		endMillis = endTime.getTimeInMillis();
 		
+		/*
+		 * TODO: Fill in Calendar Fields 
+		 */
+				
 		long eventId = 0;
-		return eventId;
+		
+		/*
+		 * TODO: Capture Event ID
+		 */
+		
+		if(eventId != 0)
+		{
+			return eventId;
+		}
+		else
+			return -1;
 	}
 	
 	/**
