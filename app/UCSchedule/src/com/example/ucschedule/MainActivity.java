@@ -1,10 +1,16 @@
 package com.example.ucschedule;
 
-import android.os.Bundle;
-import android.provider.CalendarContract.Events;
+import java.util.Calendar;
+
+import android.R.bool;
+import android.app.Activity;
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
-import android.app.Activity;
+import android.database.Cursor;
+import android.os.Bundle;
+import android.provider.CalendarContract;
+import android.provider.CalendarContract.Calendars;
+import android.provider.CalendarContract.Events;
 import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
@@ -14,6 +20,8 @@ import android.widget.Button;
  *	
  */
 public class MainActivity extends Activity {
+
+	private static final String MY_ACCOUNT_NAME = null;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -101,5 +109,86 @@ public class MainActivity extends Activity {
 		getMenuInflater().inflate(R.menu.main, menu);
 		return true;
 	}
+	/**
+	 * Adds an event to the calendar specified by the calendar ID. Returns the event ID of the event this method creates.
+	 * 
+	 * @param calendarId
+	 * @param allDayEvent
+	 * @param startYear
+	 * @param startMonth
+	 * @param startDay
+	 * @param startHour
+	 * @param startMinute
+	 * @param endYear
+	 * @param endMonth
+	 * @param endDay
+	 * @param endHour
+	 * @param endMinute
+	 * @param timeZone
+	 * @param title
+	 * @param description
+	 * @return long eventID
+	 */
+	public long addEvent(
+			long calendarId, 
+			boolean allDayEvent,
+			int startYear,
+			int startMonth,
+			int startDay,
+			int startHour,
+			int startMinute,
+			int endYear,
+			int endMonth,
+			int endDay,
+			int endHour,
+			int endMinute,
+			String timeZone, 
+			String title, 
+			String description)
+	{
+		allDayEvent = false;
+		long startMillis = 0; 
+		long endMillis = 0;   
+		
+		Calendar beginTime = Calendar.getInstance();
+		beginTime.set(startYear, startMonth, startDay, startHour, startMinute);
+		startMillis = beginTime.getTimeInMillis();
+		Calendar endTime = Calendar.getInstance();
+		endTime.set(endYear, endMonth, endDay, endHour, endMinute);
+		endMillis = endTime.getTimeInMillis();
+		
+		long eventId = 0;
+		return eventId;
+	}
+	
+	/**
+	 * Retrieves the calendar ID of the default Android Calendar. This is required for the addEvent method
+	 * @return long CalendarID
+	 */
+	private long getCalendarId() { 
+		   String[] projection = new String[]{Calendars._ID}; 
+		   String selection = 
+		         Calendars.ACCOUNT_NAME + 
+		         " = ? " + 
+		         Calendars.ACCOUNT_TYPE + 
+		         " = ? "; 
+		   // use the same values as above:
+		   String[] selArgs = 
+		         new String[]{
+		               MY_ACCOUNT_NAME, 
+		               CalendarContract.ACCOUNT_TYPE_LOCAL}; 
+		   Cursor cursor = 
+		         getContentResolver().
+		               query(
+		                  Calendars.CONTENT_URI, 
+		                  projection, 
+		                  selection, 
+		                  selArgs, 
+		                  null); 
+		   if (cursor.moveToFirst()) { 
+		      return cursor.getLong(0); 
+		   } 
+		   return -1; 
+		}  
 
 }
