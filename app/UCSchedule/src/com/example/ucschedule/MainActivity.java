@@ -1,12 +1,15 @@
 package com.example.ucschedule;
 
 import java.util.Calendar;
+import java.util.GregorianCalendar;
+import java.util.TimeZone;
 
-import android.R.bool;
 import android.app.Activity;
-import android.content.ActivityNotFoundException;
+import android.content.ContentResolver;
+import android.content.ContentValues;
 import android.content.Intent;
 import android.database.Cursor;
+import android.net.Uri;
 import android.os.Bundle;
 import android.provider.CalendarContract;
 import android.provider.CalendarContract.Calendars;
@@ -21,7 +24,7 @@ import android.widget.Button;
  */
 public class MainActivity extends Activity {
 
-	private static final String MY_ACCOUNT_NAME = null;
+	private static final String MY_ACCOUNT_NAME = "arthur.n.johnson@gmail.com";
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -72,6 +75,8 @@ public class MainActivity extends Activity {
 				/*
 				 * Intent used to access the add event activity in the calendar
 				 */
+				
+				/*
 				try{
 				 	Intent intent = new Intent(Intent.ACTION_INSERT);
 					intent.setType("vnd.android.cursor.item/event");
@@ -82,6 +87,12 @@ public class MainActivity extends Activity {
 				catch (ActivityNotFoundException activityNotFound){
 					
 				}
+				*/
+				
+				addEvent();
+				Intent i = MainActivity.this.getPackageManager().getLaunchIntentForPackage("com.android.calendar");
+				if (i != null)
+				startActivity(i);
 
 			}
 		});
@@ -128,6 +139,7 @@ public class MainActivity extends Activity {
 	 * @param title
 	 * @return long eventID
 	 */
+	/*
 	public long addEvent(
 			long calendarId, 
 			boolean allDayEvent,
@@ -143,23 +155,58 @@ public class MainActivity extends Activity {
 			int endMinute,
 			String timeZone, 
 			String title)
-	{
-		allDayEvent = false;
-		long startMillis = 0; 
-		long endMillis = 0;   
-		
-		Calendar beginTime = Calendar.getInstance();
-		beginTime.set(startYear, startMonth, startDay, startHour, startMinute);
-		startMillis = beginTime.getTimeInMillis();
-		Calendar endTime = Calendar.getInstance();
-		endTime.set(endYear, endMonth, endDay, endHour, endMinute);
-		endMillis = endTime.getTimeInMillis();
-		
-		/*
-		 * TODO: Fill in Calendar Fields 
-		 */
-				
+	*/
+	public long addEvent()
+	{	
 		long eventId = 0;
+		
+		String[] projection = new String[]{
+			            Calendars._ID, 
+			            Calendars.NAME, 
+			            Calendars.ACCOUNT_NAME, 
+			            Calendars.ACCOUNT_TYPE};
+			Cursor calCursor = getContentResolver().query(
+					Calendars.CONTENT_URI,
+					projection,
+					Calendars.VISIBLE + " = 1", 
+					null, 
+			        Calendars._ID + " ASC");
+			if (calCursor.moveToFirst()) {
+				boolean checkEventAlreadySet = false;
+			   do {
+			      long id = calCursor.getLong(0);
+			      String displayName = calCursor.getString(1);
+
+				    
+					Calendar cal = new GregorianCalendar(2013, 05, 26);
+					cal.setTimeZone(TimeZone.getTimeZone("EST"));
+					cal.set(Calendar.HOUR, 6);
+					cal.set(Calendar.MINUTE, 30);
+					cal.set(Calendar.SECOND, 0);
+					cal.set(Calendar.MILLISECOND, 0);
+					long start = cal.getTimeInMillis();
+					ContentValues values = new ContentValues();
+					values.put(Events.DTSTART, start);
+					values.put(Events.DTEND, start);
+					
+					values.put(Events.TITLE, "Test Event");
+					values.put(Events.EVENT_LOCATION, "Baldwin");
+					values.put(Events.CALENDAR_ID, id);
+
+					values.put(Events.EVENT_TIMEZONE, "America/New_York");
+					values.put(Events.DESCRIPTION, 
+					      "The agenda or some description of the event");
+					values.put(Events.ALL_DAY, 1);
+					
+					Uri uri1 = getContentResolver().insert(Events.CONTENT_URI, values);
+					
+					eventId = new Long(uri1.getLastPathSegment());
+					
+					checkEventAlreadySet = true;
+					
+					
+			   } while (calCursor.moveToNext() && checkEventAlreadySet == false);
+			}
 		
 		/*
 		 * TODO: Capture Event ID
@@ -181,7 +228,7 @@ public class MainActivity extends Activity {
 		   String[] projection = new String[]{Calendars._ID}; 
 		   String selection = 
 		         Calendars.ACCOUNT_NAME + 
-		         " = ? " + 
+		         " = ? " +
 		         Calendars.ACCOUNT_TYPE + 
 		         " = ? "; 
 		   // use the same values as above:
