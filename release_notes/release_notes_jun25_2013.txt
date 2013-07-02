@@ -8,3 +8,9 @@ June 25 2013:
 
 Comments:
 
+
+1. Continue working on interfacing to the calendar
+2. Continue to do code reviews, document/comment any code you write, start writing test cases (write tests-before-you-code)
+
+
+I expect to see some progress/update on the database front. Good luck! Nice job on the test plan.
