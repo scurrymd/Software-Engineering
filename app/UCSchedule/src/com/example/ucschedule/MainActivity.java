@@ -89,7 +89,7 @@ public class MainActivity extends Activity {
 				}
 				*/
 				
-				addEvent();
+				//addEvent();
 				Intent i = MainActivity.this.getPackageManager().getLaunchIntentForPackage("com.android.calendar");
 				if (i != null)
 				startActivity(i);
@@ -139,7 +139,6 @@ public class MainActivity extends Activity {
 	 * @param title
 	 * @return long eventID
 	 */
-	/*
 	public long addEvent(
 			long calendarId, 
 			boolean allDayEvent,
@@ -155,8 +154,7 @@ public class MainActivity extends Activity {
 			int endMinute,
 			String timeZone, 
 			String title)
-	*/
-	public long addEvent()
+	
 	{	
 		long eventId = 0;
 		
