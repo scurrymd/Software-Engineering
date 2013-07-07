@@ -89,7 +89,7 @@ public class MainActivity extends Activity {
 				}
 				*/
 				
-				//addEvent();
+				addEvent(0, false, 2013, 06, 7, 17, 30, 0, 0, 0, 18, 00, null, "Add Event");
 				Intent i = MainActivity.this.getPackageManager().getLaunchIntentForPackage("com.android.calendar");
 				if (i != null)
 				startActivity(i);
@@ -147,9 +147,9 @@ public class MainActivity extends Activity {
 			int startDay,
 			int startHour,
 			int startMinute,
-			int endYear,
-			int endMonth,
-			int endDay,
+			int simesterEndYear,
+			int simesterEndMonth,
+			int simesterEndDay,
 			int endHour,
 			int endMinute,
 			String timeZone, 
@@ -157,6 +157,8 @@ public class MainActivity extends Activity {
 	
 	{	
 		long eventId = 0;
+		int SECOND = 0;
+		int MILLISECOND = 0;
 		
 		String[] projection = new String[]{
 			            Calendars._ID, 
@@ -176,25 +178,34 @@ public class MainActivity extends Activity {
 			      String displayName = calCursor.getString(1);
 
 				    
-					Calendar cal = new GregorianCalendar(2013, 05, 26);
-					cal.setTimeZone(TimeZone.getTimeZone("EST"));
-					cal.set(Calendar.HOUR, 6);
-					cal.set(Calendar.MINUTE, 30);
-					cal.set(Calendar.SECOND, 0);
-					cal.set(Calendar.MILLISECOND, 0);
-					long start = cal.getTimeInMillis();
+					Calendar Startcal = new GregorianCalendar(startYear, startMonth, startDay);
+					Startcal.setTimeZone(TimeZone.getTimeZone("EST"));
+					Startcal.set(Calendar.HOUR, startHour);
+					Startcal.set(Calendar.MINUTE, startMinute);
+					Startcal.set(Calendar.SECOND, SECOND);
+					Startcal.set(Calendar.MILLISECOND, MILLISECOND);
+					long start = Startcal.getTimeInMillis();
+					
+					Calendar Endcal = new GregorianCalendar(startYear, startMonth, startDay);
+					Endcal.setTimeZone(TimeZone.getTimeZone("EST"));
+					Endcal.set(Calendar.HOUR, endHour);
+					Endcal.set(Calendar.MINUTE, endMinute);
+					Endcal.set(Calendar.SECOND, SECOND);
+					Endcal.set(Calendar.MILLISECOND, MILLISECOND);
+					long end = Endcal.getTimeInMillis();
+					
 					ContentValues values = new ContentValues();
 					values.put(Events.DTSTART, start);
-					values.put(Events.DTEND, start);
+					values.put(Events.DTEND, end);
 					
-					values.put(Events.TITLE, "Test Event");
+					values.put(Events.TITLE, title);
 					values.put(Events.EVENT_LOCATION, "Baldwin");
 					values.put(Events.CALENDAR_ID, id);
 
 					values.put(Events.EVENT_TIMEZONE, "America/New_York");
 					values.put(Events.DESCRIPTION, 
 					      "The agenda or some description of the event");
-					values.put(Events.ALL_DAY, 1);
+					values.put(Events.ALL_DAY, 0);
 					
 					Uri uri1 = getContentResolver().insert(Events.CONTENT_URI, values);
 					
