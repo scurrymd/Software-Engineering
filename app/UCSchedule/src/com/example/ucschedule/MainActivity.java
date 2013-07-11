@@ -88,8 +88,14 @@ public class MainActivity extends Activity {
 					
 				}
 				*/
-				
-				addEvent(0, false, 2013, 06, 11, 17, 30, 0, 0, 0, 18, 00, null, "Add Event");
+				long calId;
+				calId = -1;
+				calId = checkForUcCalendarId();
+				if(calId == -1)
+				{
+					calId = createCalendar();
+				}
+				addEvent(calId, false, 2013, 06, 11, 17, 30, 0, 0, 0, 18, 00, null, "Add Event");
 				Intent i = MainActivity.this.getPackageManager().getLaunchIntentForPackage("com.android.calendar");
 				if (i != null)
 				startActivity(i);
@@ -174,7 +180,6 @@ public class MainActivity extends Activity {
 			if (calCursor.moveToFirst()) {
 				boolean checkEventAlreadySet = false;
 			   do {
-			      long id = calCursor.getLong(0);
 			      String displayName = calCursor.getString(1);
 
 				    
@@ -200,7 +205,7 @@ public class MainActivity extends Activity {
 					
 					values.put(Events.TITLE, title);
 					values.put(Events.EVENT_LOCATION, "Baldwin");
-					values.put(Events.CALENDAR_ID, id);
+					values.put(Events.CALENDAR_ID, calendarId);
 
 					values.put(Events.EVENT_TIMEZONE, "America/New_York");
 					values.put(Events.DESCRIPTION, 
@@ -245,30 +250,81 @@ public class MainActivity extends Activity {
 			return 0;
 		}
 	}
-	private long getCalendarId() { 
-		   String[] projection = new String[]{Calendars._ID}; 
-		   String selection = 
-		         Calendars.ACCOUNT_NAME + 
-		         " = ? " +
-		         Calendars.ACCOUNT_TYPE + 
-		         " = ? "; 
-		   // use the same values as above:
-		   String[] selArgs = 
-		         new String[]{
-		               MY_ACCOUNT_NAME, 
-		               CalendarContract.ACCOUNT_TYPE_LOCAL}; 
-		   Cursor cursor = 
-		         getContentResolver().
-		               query(
-		                  Calendars.CONTENT_URI, 
-		                  projection, 
-		                  selection, 
-		                  selArgs, 
-		                  null); 
-		   if (cursor.moveToFirst()) { 
-		      return cursor.getLong(0); 
-		   } 
-		   return -1; 
+	private long checkForUcCalendarId() { 
+		long CalendarId = -1;
+		String[] projection = 
+			      new String[]{
+			            Calendars._ID, 
+			            Calendars.NAME, 
+			            Calendars.ACCOUNT_NAME, 
+			            Calendars.ACCOUNT_TYPE};
+			Cursor calCursor = 
+			      getContentResolver().
+			            query(Calendars.CONTENT_URI, 
+			                  projection, 
+			                  Calendars.VISIBLE + " = 1", 
+			                  null, 
+			                  Calendars._ID + " ASC");
+			if (calCursor.moveToFirst()) {
+			   do {
+			      long id = calCursor.getLong(0);
+			      String displayName = calCursor.getString(1);
+			      if(displayName.equals("UC Schedule"))
+			      {
+			    	  CalendarId = id;
+			    	  return CalendarId;
+			      }
+			   } while (calCursor.moveToNext());
+			   
+			}
+			return CalendarId;
 		}  
 
+	private long createCalendar()
+	{
+		long calendarId;
+		
+		ContentValues values = new ContentValues();
+		values.put(
+		      Calendars.ACCOUNT_NAME, 
+		      MY_ACCOUNT_NAME);
+		values.put(
+		      Calendars.ACCOUNT_TYPE, 
+		      CalendarContract.ACCOUNT_TYPE_LOCAL);
+		values.put(
+		      Calendars.NAME, 
+		      "UC Schedule");
+		values.put(
+		      Calendars.CALENDAR_DISPLAY_NAME, 
+		      "UC Schedule");
+		values.put(
+		      Calendars.CALENDAR_COLOR, 
+		      0xffff0000);
+		values.put(
+		      Calendars.CALENDAR_ACCESS_LEVEL, 
+		      Calendars.CAL_ACCESS_OWNER);
+		values.put(
+		      Calendars.OWNER_ACCOUNT, 
+		      "some.account@googlemail.com");
+		values.put(
+		      Calendars.CALENDAR_TIME_ZONE, 
+		      "America/New_York");
+		Uri.Builder builder = 
+		      CalendarContract.Calendars.CONTENT_URI.buildUpon(); 
+		builder.appendQueryParameter(
+		      Calendars.ACCOUNT_NAME, 
+		      "com.UCandroid");
+		builder.appendQueryParameter(
+		      Calendars.ACCOUNT_TYPE, 
+		      CalendarContract.ACCOUNT_TYPE_LOCAL);
+		builder.appendQueryParameter(
+		      CalendarContract.CALLER_IS_SYNCADAPTER, 
+		      "true");
+		Uri uri = 
+		      getContentResolver().insert(builder.build(), values);
+		calendarId = Long.valueOf(uri.getLastPathSegment());
+		
+		return calendarId;
+		
+	}
 }
