@@ -1,7 +1,7 @@
 package com.example.ucschedule.test;
-import com.example.ucschedule.MainActivity;
-
 import junit.framework.TestCase;
+
+import com.example.ucschedule.MainActivity;
 
 
 public class AddEventTest extends TestCase {
@@ -12,6 +12,16 @@ public class AddEventTest extends TestCase {
 	protected void tearDown() throws Exception {
 		 super.tearDown();
 		 }
+	public void testGoodCaseA() {
+		MainActivity main = new MainActivity();
+		assertEquals("Good Test Case is valid (not -1)", 1 ,main.testA(1));
+		//fail("Not yet implemented");
+	}
+	public void testBadCaseA() {
+		MainActivity main = new MainActivity();
+		assertEquals("Good Test Case is valid (not -1)", 1 ,main.testA(0));
+		//fail("Not yet implemented");
+	}
 	public void testGoodCase() {
 		MainActivity main = new MainActivity();
 		assertEquals("Good Test Case is valid (not -1)", 0 ,main.addEvent(1, false, 2013, 05, 24, 5, 00, 2013, 05, 24, 5, 30, "American/New_York", "Testing Event Add"));

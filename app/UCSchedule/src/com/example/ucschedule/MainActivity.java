@@ -89,7 +89,7 @@ public class MainActivity extends Activity {
 				}
 				*/
 				
-				addEvent(0, false, 2013, 06, 7, 17, 30, 0, 0, 0, 18, 00, null, "Add Event");
+				addEvent(0, false, 2013, 06, 11, 17, 30, 0, 0, 0, 18, 00, null, "Add Event");
 				Intent i = MainActivity.this.getPackageManager().getLaunchIntentForPackage("com.android.calendar");
 				if (i != null)
 				startActivity(i);
@@ -130,9 +130,9 @@ public class MainActivity extends Activity {
 	 * @param startDay
 	 * @param startHour
 	 * @param startMinute
-	 * @param endYear
-	 * @param endMonth
-	 * @param endDay
+	 * @param semesterEndYear
+	 * @param semesterEndMonth
+	 * @param semesterEndDay
 	 * @param endHour
 	 * @param endMinute
 	 * @param timeZone
@@ -147,9 +147,9 @@ public class MainActivity extends Activity {
 			int startDay,
 			int startHour,
 			int startMinute,
-			int simesterEndYear,
-			int simesterEndMonth,
-			int simesterEndDay,
+			int semesterEndYear,
+			int semesterEndMonth,
+			int semesterEndDay,
 			int endHour,
 			int endMinute,
 			String timeZone, 
@@ -209,7 +209,7 @@ public class MainActivity extends Activity {
 					
 					Uri uri1 = getContentResolver().insert(Events.CONTENT_URI, values);
 					
-					eventId = new Long(uri1.getLastPathSegment());
+					eventId = Long.valueOf(uri1.getLastPathSegment());
 					
 					checkEventAlreadySet = true;
 					
@@ -233,6 +233,18 @@ public class MainActivity extends Activity {
 	 * Retrieves the calendar ID of the default Android Calendar. This is required for the addEvent method
 	 * @return long CalendarID
 	 */
+	
+	public int testA(int a)
+	{
+		if(a==1)
+		{
+			return a;
+		}
+		else
+		{
+			return 0;
+		}
+	}
 	private long getCalendarId() { 
 		   String[] projection = new String[]{Calendars._ID}; 
 		   String selection = 
