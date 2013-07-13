@@ -1,0 +1,13 @@
+UC Schedule:
+
+July 11, 2013:
+
+
+
+Comments:
+
+1. Don't forget to add release notes.
+2. Get database import to work and start working on login. 
+3. Continuing writing test cases. 
+
+Keep up the good work!
