@@ -9,6 +9,7 @@
         android:targetSdkVersion="17" />
     <uses-permission android:name="android.permission.READ_CALENDAR" />
     <uses-permission android:name="android.permission.WRITE_CALENDAR" />
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -25,7 +26,11 @@
             </intent-filter>
         </activity>
         <activity android:name="LoginActivity"></activity>
-        <activity android:name="EventTestActivity"></activity>
+        <activity android:name="JSONtest"></activity>
+        <activity
+            android:label="Single Menu Item"
+            android:name=".SingleMenuItemActivity" >
+        </activity>
     </application>
 
 </manifest>

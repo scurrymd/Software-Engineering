@@ -43,6 +43,7 @@ public class MainActivity extends Activity {
 		/**
 		 * Button to open the android calendar
 		 */
+		Button goToJsonTest = (Button) findViewById(R.id.button1);
 		
 		goToLogin.setOnClickListener(new View.OnClickListener() {
 			
@@ -115,6 +116,20 @@ public class MainActivity extends Activity {
 				Intent i = MainActivity.this.getPackageManager().getLaunchIntentForPackage("com.android.calendar");
 				if (i != null)
 				startActivity(i);
+				
+			}
+		});
+		
+		goToJsonTest.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				
+				/**
+				 * function to open the android calendar
+				 */
+				Intent n = new Intent(MainActivity.this,JSONtest.class);
+			 	startActivity(n);
 				
 			}
 		});
