@@ -4,6 +4,12 @@ July 11, 2013:
 
 
 
+• Added Add Event functionality
+• Implemented Add Event tests
+• Implemented Json file into app (proof of concept)
+• Added EclEmma code coverage tool 
+• Updated Specs document
+
 Comments:
 
 1. Don't forget to add release notes.
