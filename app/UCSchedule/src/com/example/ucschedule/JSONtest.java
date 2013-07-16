@@ -1,5 +1,12 @@
 package com.example.ucschedule;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.Reader;
+import java.io.StringWriter;
+import java.io.Writer;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -8,129 +15,183 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.app.ListActivity;
-import android.content.Intent;
 import android.os.Bundle;
 import android.os.StrictMode;
-import android.view.View;
-import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
+import android.util.Log;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
-import android.widget.TextView;
-
+ 
 public class JSONtest extends ListActivity {
-
-	// url to make request
-	private static String url = "http://api.androidhive.info/contacts/";
-	
-	// JSON Node names
-	private static final String TAG_CONTACTS = "contacts";
-	private static final String TAG_ID = "id";
-	private static final String TAG_NAME = "name";
-	private static final String TAG_EMAIL = "email";
-	private static final String TAG_ADDRESS = "address";
-	private static final String TAG_GENDER = "gender";
-	private static final String TAG_PHONE = "phone";
-	private static final String TAG_PHONE_MOBILE = "mobile";
-	private static final String TAG_PHONE_HOME = "home";
-	private static final String TAG_PHONE_OFFICE = "office";
-
-	// contacts JSONArray
-	JSONArray contacts = null;
-
-	@Override
-	public void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_json);
-		
-		 // TODO: get rid of this code. Need to do it with an Async Task
+ 
+    // url to make request
+    private static String url = "http://api.androidhive.info/contacts/";
+    private static String url2 = "file:///C:/Users/Arthur%20-%20User/Documents/GitHub/Software-Engineering/misc/schedule.json";
+     
+    // JSON Node names
+    private static final String TAG_ACAD_PROGRAM_AREA = "acadProgramArea";
+    private static final String TAG_CREDIT_HOURS = "creditHours";
+    private static final String TAG_CREDIT_LEVEL_DESC = "creditLevelDesc";
+    private static final String TAG_FULL_NAME = "fullName";
+    private static final String TAG_NUMBER_OF_ENROLLED_CLASSES = "numberOfEnrolledClasses";
+    private static final String TAG_PROGRAM_LOCATION = "programLocation";
+    private static final String TAG_STUDENT_CLASSIFICATION = "studentClassification";
+    private static final String TAG_TERM_CODE = "termCode";
+    
+    //Class info
+    private static final String TAG_CLASS_INFO = "enrolledClassesInfo";
+    private static final String TAG_BUILDING = "buildingCode";
+    private static final String TAG_CLASS_CALL_NUMBER = "classCallNumber";
+    private static final String TAG_SECTION_NUMBER = "classSectionIDAlpha";
+    private static final String TAG_CLASS_TITLE = "classTitle";
+    private static final String TAG_COURSE_ID = "courseID";
+    private static final String TAG_CREDIT_LEVEL_CODE = "creditLevelCode";
+    private static final String TAG_DAYS_OF_WEEK = "daysOfWeek";
+    private static final String TAG_GRADE = "grade";
+    private static final String TAG_GRADE_TYPE = "gradeType";
+    private static final String TAG_GRADE_SHOWN_ON_TRANSCRIPT = "gradeValueShownOnTranscript";
+    private static final String TAG_GRADING_SYSTEM_CODE = "gradingSystemCode";
+    private static final String TAG_INTRUCT_MEDTHOD_CODE = "instructMethodCode";
+    private static final String TAG_INSTRUCTOR_NAME = "instructorName";
+    private static final String TAG_START_TIME = "meetingStartTime";
+    private static final String TAG_END_TIME = "meetingStopTime";
+    private static final String TAG_ROOM_NUMBER = "roomNumber";
+    private static final String TAG_SITE_CODE = "siteCode";
+    private static final String TAG_TERM_TYPE_SESSION_ID = "termTypeSessionID";
+   
+ 
+    // contacts JSONArray
+    JSONArray schedule = null;
+ 
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_json);
+        
+        // TODO: get rid of this code. Need to do it with an Async Task
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
+         
+        // Hashmap for ListView
+        ArrayList<HashMap<String, String>> scheduleList = new ArrayList<HashMap<String, String>>();
+ 
+        // Creating JSON Parser instance
+        JSONParser jParser = new JSONParser();
+ 
+        // getting JSON string from file
         
-		// Hashmap for ListView
-		ArrayList<HashMap<String, String>> contactList = new ArrayList<HashMap<String, String>>();
-
-		// Creating JSON Parser instance
-		JSONParser jParser = new JSONParser();
-
-		// getting JSON string from URL
-		JSONObject json = jParser.getJSONFromUrl(url);
-
+        JSONObject json=null;
 		try {
-			// Getting Array of Contacts
-			contacts = json.getJSONArray(TAG_CONTACTS);
-			
-			// looping through All Contacts
-			for(int i = 0; i < contacts.length(); i++){
-				JSONObject c = contacts.getJSONObject(i);
-				
-				// Storing each json item in variable
-				String id = c.getString(TAG_ID);
-				String name = c.getString(TAG_NAME);
-				String email = c.getString(TAG_EMAIL);
-				String address = c.getString(TAG_ADDRESS);
-				String gender = c.getString(TAG_GENDER);
-				
-				// Phone number is agin JSON Object
-				JSONObject phone = c.getJSONObject(TAG_PHONE);
-				String mobile = phone.getString(TAG_PHONE_MOBILE);
-				String home = phone.getString(TAG_PHONE_HOME);
-				String office = phone.getString(TAG_PHONE_OFFICE);
-				
-				// creating new HashMap
-				HashMap<String, String> map = new HashMap<String, String>();
-				
-				// adding each child node to HashMap key => value
-				map.put(TAG_ID, id);
-				map.put(TAG_NAME, name);
-				map.put(TAG_EMAIL, email);
-				map.put(TAG_PHONE_MOBILE, mobile);
-
-				// adding HashList to ArrayList
-				contactList.add(map);
-			}
-		} catch (JSONException e) {
-			e.printStackTrace();
+			json = getJSONFromFile();
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
 		}
+        
+        /*try {
+			JSONObject json = getJSONFromFile();
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}*/
+ 
+        try {
+            // Getting Array of Contacts
+        	schedule = json.getJSONArray(TAG_CLASS_INFO);
+             
+            // looping through All Contacts
+            for(int i = 0; i < schedule.length(); i++){
+                JSONObject s = schedule.getJSONObject(i);
+                 
+                // Storing each json item in variable
+                String title = s.getString(TAG_CLASS_TITLE);
+                String startTime = s.getString(TAG_START_TIME);
+                String endTime = s.getString(TAG_END_TIME);
+                 
+                // creating new HashMap
+                HashMap<String, String> map = new HashMap<String, String>();
+                 
+                // adding each child node to HashMap key => value
+                map.put(TAG_CLASS_TITLE, title);
+                map.put(TAG_START_TIME, startTime);
+                map.put(TAG_END_TIME, endTime);
+ 
+                // adding HashList to ArrayList
+                scheduleList.add(map);
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+         
+         
+        /**
+         * Updating parsed JSON data into ListView
+         * */
+        ListAdapter adapter = new SimpleAdapter(this, scheduleList,
+                R.layout.list_item,
+                new String[] { TAG_CLASS_TITLE, TAG_START_TIME, TAG_END_TIME }, new int[] {
+                        R.id.name, R.id.email, R.id.mobile });
+ 
+        setListAdapter(adapter);
+ 
+        // selecting single ListView item
+        ListView lv = getListView();
+ 
+
+        /*
+        // Launching new screen on Selecting Single ListItem
+        lv.setOnItemClickListener(new OnItemClickListener() {
+ 
+        	
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view,
+                    int position, long id) {
+                // getting values from selected ListItem
+                String name = ((TextView) view.findViewById(R.id.name)).getText().toString();
+                String cost = ((TextView) view.findViewById(R.id.email)).getText().toString();
+                String description = ((TextView) view.findViewById(R.id.mobile)).getText().toString();
+                 
+                // Starting new intent
+                Intent in = new Intent(getApplicationContext(), SingleMenuItemActivity.class);
+                in.putExtra(TAG_NAME, name);
+                in.putExtra(TAG_EMAIL, cost);
+                in.putExtra(TAG_PHONE_MOBILE, description);
+                startActivity(in);
+            }
+            
+            
+        });
+        */
+    }
+    
+	public JSONObject getJSONFromFile() throws IOException
+	{
+		InputStream is = getResources().openRawResource(R.raw.schedule);
+		Writer writer = new StringWriter();
+		char[] buffer = new char[1024];
+		try {
+		    Reader reader = new BufferedReader(new InputStreamReader(is, "UTF-8"));
+		    int n;
+		    while ((n = reader.read(buffer)) != -1) {
+		        writer.write(buffer, 0, n);
+		    }
+		} finally {
+		    is.close();
+		}
+
+		String jsonString = writer.toString();
+		JSONObject jObj=null;
 		
-		
-		/**
-		 * Updating parsed JSON data into ListView
-		 * */
-		ListAdapter adapter = new SimpleAdapter(this, contactList,
-				R.layout.list_item,
-				new String[] { TAG_NAME, TAG_EMAIL, TAG_PHONE_MOBILE }, new int[] {
-						R.id.name, R.id.email, R.id.mobile });
-
-		setListAdapter(adapter);
-
-		// selecting single ListView item
-		ListView lv = getListView();
-
-		// Launching new screen on Selecting Single ListItem
-		lv.setOnItemClickListener(new OnItemClickListener() {
-
-			@Override
-			public void onItemClick(AdapterView<?> parent, View view,
-					int position, long id) {
-				// getting values from selected ListItem
-				String name = ((TextView) view.findViewById(R.id.name)).getText().toString();
-				String cost = ((TextView) view.findViewById(R.id.email)).getText().toString();
-				String description = ((TextView) view.findViewById(R.id.mobile)).getText().toString();
-				
-				// Starting new intent
-				Intent in = new Intent(getApplicationContext(), SingleMenuItemActivity.class);
-				in.putExtra(TAG_NAME, name);
-				in.putExtra(TAG_EMAIL, cost);
-				in.putExtra(TAG_PHONE_MOBILE, description);
-				startActivity(in);
-
-			}
-		});
-		
-		
+		// try parse the string to a JSON object
+		try {
+			jObj = new JSONObject(jsonString);
+		} catch (JSONException e) {
+			Log.e("JSON Parser", "Error parsing data " + e.toString());
+		}
+			
+		return jObj;
+		// return JSON String
 
 	}
-
+ 
 }

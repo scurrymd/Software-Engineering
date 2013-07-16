@@ -4,23 +4,10 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.Reader;
+import java.io.StringWriter;
 import java.io.UnsupportedEncodingException;
- 
-import org.apache.http.HttpEntity;
-import org.apache.http.HttpResponse;
-import org.apache.http.client.ClientProtocolException;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.impl.client.DefaultHttpClient;
-import org.json.JSONException;
-import org.json.JSONObject;
- 
-import android.util.Log;
- 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.UnsupportedEncodingException;
+import java.io.Writer;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -89,8 +76,32 @@ public class JSONParser {
 
 	}
 	
-	public JSONObject getJSONFromFile(String filePath)
+/*	public JSONObject getJSONFromFile()
 	{
+		InputStream is = getResources().openRawResource(R.raw.schedule);
+		Writer writer = new StringWriter();
+		char[] buffer = new char[1024];
+		try {
+		    Reader reader = new BufferedReader(new InputStreamReader(is, "UTF-8"));
+		    int n;
+		    while ((n = reader.read(buffer)) != -1) {
+		        writer.write(buffer, 0, n);
+		    }
+		} finally {
+		    is.close();
+		}
+
+		String jsonString = writer.toString();
+		
+		// try parse the string to a JSON object
+		try {
+			jObj = new JSONObject(jsonString);
+		} catch (JSONException e) {
+			Log.e("JSON Parser", "Error parsing data " + e.toString());
+		}
+
+		// return JSON String
 		return jObj;
-	}
+
+	}*/
 }
