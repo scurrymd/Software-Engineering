@@ -9,11 +9,9 @@ import java.io.StringWriter;
 import java.io.Writer;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
-import java.util.HashMap;
 import java.util.Locale;
 import java.util.TimeZone;
 
@@ -34,8 +32,6 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
-
-import com.example.ucschedule.JSONtest;
 /**
  * Main activity class. This contains the main menu of the application.
  * @author Matt

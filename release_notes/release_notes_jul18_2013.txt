@@ -1,0 +1,10 @@
+UC Schedule:
+
+July 11, 2013:
+
+
+
+• Implemented shortened Arthur's schedule into calendar
+
+Comments:
+
