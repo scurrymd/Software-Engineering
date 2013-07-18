@@ -19,6 +19,9 @@ import org.json.JSONObject;
 
 import android.util.Log;
 
+/**
+ * Class used for parsing JSON data.
+ */
 public class JSONParser {
 
 	static InputStream is = null;
@@ -30,6 +33,7 @@ public class JSONParser {
 
 	}
 
+	//TODO: This is only sample code.
 	public JSONObject getJSONFromUrl(String url) {
 
 		// Making HTTP request
@@ -75,6 +79,8 @@ public class JSONParser {
 		return jObj;
 
 	}
+	
+	//TODO: Move this method to this class and get it to work properly outside of an actvity class.
 	
 /*	public JSONObject getJSONFromFile()
 	{

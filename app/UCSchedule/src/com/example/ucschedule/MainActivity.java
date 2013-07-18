@@ -91,10 +91,13 @@ public class MainActivity extends Activity {
 			                 
 			                // Storing each json item in variable
 			                String title = s.getString(TAG_CLASS_TITLE);
+			                
+			                //The time coming from the JSON file is missing an "m" for the period (AM or PM).
 			                String MISSING_LETTER_IN_PERIOD = "m"; 
 			                String startTimeAsString = s.getString(TAG_START_TIME) + MISSING_LETTER_IN_PERIOD; //TODO: check to make sure the letter is missing first
 			                String endTimeAsString = s.getString(TAG_END_TIME) + MISSING_LETTER_IN_PERIOD; //TODO: check to make sure the letter is missing first
 			                
+			                //Hours passed into the calendar have an offset of -1.
 			                int HOUR_OFFSET = -1;
 			                int startTimeHourAsInt = parseTimeForHour(startTimeAsString) + HOUR_OFFSET;
 			                int startTimeMinuteAsInt = parseTimeForMinute(startTimeAsString);
@@ -102,6 +105,7 @@ public class MainActivity extends Activity {
 			                int endTimeHourAsInt = parseTimeForHour(endTimeAsString) + HOUR_OFFSET;
 			                int endTimeMinuteAsInt = parseTimeForMinute(endTimeAsString);
 			                
+			                //TODO: Get rid of duplicate code. Possibly make a seperate method for checking calendar ID.
 			                long calId;
 							calId = -1;
 							calId = checkForUcCalendarId();
@@ -148,28 +152,7 @@ public class MainActivity extends Activity {
 				/**
 				 *  Function to go to the add Event test page
 				 */
-				
-				/*
-				Intent n = new Intent(MainActivity.this,EventTestActivity.class);
-			 	startActivity(n);
-			 	*/
-				
-				/*
-				 * Intent used to access the add event activity in the calendar
-				 */
-				
-				/*
-				try{
-				 	Intent intent = new Intent(Intent.ACTION_INSERT);
-					intent.setType("vnd.android.cursor.item/event");
-					intent.putExtra(Events.TITLE, "");
-		
-					startActivity(intent);
-				}
-				catch (ActivityNotFoundException activityNotFound){
-					
-				}
-				*/
+
 				long calId;
 				calId = -1;
 				calId = checkForUcCalendarId();
@@ -331,10 +314,10 @@ public class MainActivity extends Activity {
 	}
 	
 	/**
-	 * Retrieves the calendar ID of the default Android Calendar. This is required for the addEvent method
-	 * @return long CalendarID
+	 * Trivial test method used to test the junit tests and code coverage to make sure it's working properly.
+	 * @param a
+	 * @return
 	 */
-	
 	public int testA(int a)
 	{
 		if(a==1)
@@ -346,6 +329,11 @@ public class MainActivity extends Activity {
 			return 0;
 		}
 	}
+	
+	/**
+	 * Checks for the UC Calendar ID of the default Android Calendar. This is required for the addEvent method
+	 * @return long CalendarID
+	 */
 	private long checkForUcCalendarId() { 
 		long CalendarId = -1;
 		String[] projection = 
@@ -425,6 +413,11 @@ public class MainActivity extends Activity {
 	}
 	
 	//TODO: make private and create test cases
+	/**
+	 * Extracts the hour of a string showing time in the format of "hh:mma" time as an int.
+	 * @param time (a string in the form of "hh:mma" where h= hour, m = minute, and a = am or pm)
+	 * @return int hour (the hour as an int of the time entered in as a parameter)
+	 */
 	public int parseTimeForHour(String time)
 	{
 		try {
@@ -441,6 +434,11 @@ public class MainActivity extends Activity {
 	}
 	
 	//TODO: make private and create test cases
+	/**
+	 * Extracts the minute of a string showing time in the format of "hh:mma" time as an int.
+	 * @param time (a string in the form of "hh:mma" where h= hour, m = minute, and a = am or pm)
+	 * @return int minute (the minute as an int of the time entered in as a parameter)
+	 */
 	public int parseTimeForMinute(String time)
 	{
 		try {
@@ -461,7 +459,7 @@ public class MainActivity extends Activity {
 	public static final String TAG_START_TIME = "meetingStartTime";
 	public static final String TAG_END_TIME = "meetingStopTime";
 	
-	
+	//TODO: Find a way to put this in the JSONParser class and call on it from there.
 	public JSONObject getJSONFromFile() throws IOException
 	{
 		InputStream is = getResources().openRawResource(R.raw.schedule);
