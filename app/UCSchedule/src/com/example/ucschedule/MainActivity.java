@@ -1,11 +1,27 @@
 package com.example.ucschedule;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.Reader;
+import java.io.StringWriter;
+import java.io.Writer;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.HashMap;
+import java.util.Locale;
 import java.util.TimeZone;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import android.app.Activity;
-import android.content.ContentResolver;
 import android.content.ContentValues;
 import android.content.Intent;
 import android.database.Cursor;
@@ -14,9 +30,12 @@ import android.os.Bundle;
 import android.provider.CalendarContract;
 import android.provider.CalendarContract.Calendars;
 import android.provider.CalendarContract.Events;
+import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
+
+import com.example.ucschedule.JSONtest;
 /**
  * Main activity class. This contains the main menu of the application.
  * @author Matt
@@ -43,7 +62,69 @@ public class MainActivity extends Activity {
 		/**
 		 * Button to open the android calendar
 		 */
-		Button goToJsonTest = (Button) findViewById(R.id.button1);
+		Button goToJsonTest = (Button) findViewById(R.id.btnJsonParseTest);
+		
+		Button goToAddEventWithJson = (Button) findViewById(R.id.btnAddEventsFromJson);
+		
+		goToAddEventWithJson.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				
+				JSONArray schedule = null;
+				JSONObject json = null;
+				
+				try {
+					json = getJSONFromFile();
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				
+				 try {
+			            // Getting Array of Contacts
+			        	schedule = json.getJSONArray(TAG_CLASS_INFO);
+			             
+			            // looping through All Classes
+			            for(int i = 0; i < schedule.length(); i++){
+			                JSONObject s = schedule.getJSONObject(i);
+			                 
+			                // Storing each json item in variable
+			                String title = s.getString(TAG_CLASS_TITLE);
+			                String MISSING_LETTER_IN_PERIOD = "m"; 
+			                String startTimeAsString = s.getString(TAG_START_TIME) + MISSING_LETTER_IN_PERIOD; //TODO: check to make sure the letter is missing first
+			                String endTimeAsString = s.getString(TAG_END_TIME) + MISSING_LETTER_IN_PERIOD; //TODO: check to make sure the letter is missing first
+			                
+			                int HOUR_OFFSET = -1;
+			                int startTimeHourAsInt = parseTimeForHour(startTimeAsString) + HOUR_OFFSET;
+			                int startTimeMinuteAsInt = parseTimeForMinute(startTimeAsString);
+			                
+			                int endTimeHourAsInt = parseTimeForHour(endTimeAsString) + HOUR_OFFSET;
+			                int endTimeMinuteAsInt = parseTimeForMinute(endTimeAsString);
+			                
+			                long calId;
+							calId = -1;
+							calId = checkForUcCalendarId();
+							if(calId == -1)
+							{
+								calId = createCalendar();
+							}
+							
+							//TODO: finish filling in parameters to the AddEvent method.
+							//TODO: Get classes to add on proper days of the week.
+							addEvent(calId, false, 2013, 06, 17, startTimeHourAsInt, startTimeMinuteAsInt, 0, 0, 0, endTimeHourAsInt, endTimeMinuteAsInt, null, title);
+							Intent calendar = MainActivity.this.getPackageManager().getLaunchIntentForPackage("com.android.calendar");
+							if (calendar != null)
+							startActivity(calendar);
+			            }
+			        } catch (JSONException e) {
+			            e.printStackTrace();
+			        }
+				
+				
+				
+			}
+		});
 		
 		goToLogin.setOnClickListener(new View.OnClickListener() {
 			
@@ -320,7 +401,7 @@ public class MainActivity extends Activity {
 		      Calendars.CAL_ACCESS_OWNER);
 		values.put(
 		      Calendars.OWNER_ACCOUNT, 
-		      "some.account@googlemail.com");
+		      "some.account@googlemail.com"); //TODO: Get actual account
 		values.put(
 		      Calendars.CALENDAR_TIME_ZONE, 
 		      "America/New_York");
@@ -341,5 +422,73 @@ public class MainActivity extends Activity {
 		
 		return calendarId;
 		
+	}
+	
+	//TODO: make private and create test cases
+	public int parseTimeForHour(String time)
+	{
+		try {
+			Date date = new SimpleDateFormat("hh:mma", Locale.ENGLISH).parse(time);
+			
+			@SuppressWarnings("deprecation")
+			int hour = date.getHours();
+			return hour;
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return -1;
+	}
+	
+	//TODO: make private and create test cases
+	public int parseTimeForMinute(String time)
+	{
+		try {
+			Date date = new SimpleDateFormat("hh:mma", Locale.ENGLISH).parse(time);
+			
+			@SuppressWarnings("deprecation")
+			int minute = date.getMinutes();
+			return minute;
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return -1;	
+	}
+	
+	public static final String TAG_CLASS_INFO = "enrolledClassesInfo";
+	public static final String TAG_CLASS_TITLE = "classTitle";
+	public static final String TAG_START_TIME = "meetingStartTime";
+	public static final String TAG_END_TIME = "meetingStopTime";
+	
+	
+	public JSONObject getJSONFromFile() throws IOException
+	{
+		InputStream is = getResources().openRawResource(R.raw.schedule);
+		Writer writer = new StringWriter();
+		char[] buffer = new char[1024];
+		try {
+		    Reader reader = new BufferedReader(new InputStreamReader(is, "UTF-8"));
+		    int n;
+		    while ((n = reader.read(buffer)) != -1) {
+		        writer.write(buffer, 0, n);
+		    }
+		} finally {
+		    is.close();
+		}
+
+		String jsonString = writer.toString();
+		JSONObject jObj=null;
+		
+		// try parse the string to a JSON object
+		try {
+			jObj = new JSONObject(jsonString);
+		} catch (JSONException e) {
+			Log.e("JSON Parser", "Error parsing data " + e.toString());
+		}
+			
+		return jObj;
+		// return JSON String
+
 	}
 }

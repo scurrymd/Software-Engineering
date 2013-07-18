@@ -9,14 +9,6 @@
     tools:context=".MainActivity" >
 
     <!-- Button to go to the calendar -->
-    <Button
-        android:id="@+id/btnGoToCalendar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/btnGoToAddEvent"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp"
-        android:text="@string/strCalendar" />
 
     <!-- Button to go to the add event test page -->
     <Button
@@ -28,20 +20,37 @@
         android:text="add event (test)" />
     
 	<!-- Button to go to the login screen -->
+
     <Button
-        android:id="@+id/btnGoToLogin"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/btnGoToAddEvent"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="63dp"
-        android:text="@string/strLoginBtn" />
-    <Button
-        android:id="@+id/button1"
+        android:id="@+id/btnJsonParseTest"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_above="@+id/btnGoToLogin"
         android:layout_centerHorizontal="true"
         android:text="Json (test)" />
+
+    <Button
+        android:id="@+id/btnGoToLogin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/btnGoToAddEvent"
+        android:layout_centerHorizontal="true"
+        android:text="@string/strLoginBtn" />
+
+    <Button
+        android:id="@+id/btnGoToCalendar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/btnGoToAddEvent"
+        android:layout_centerHorizontal="true"
+        android:text="@string/strCalendar" />
+
+    <Button
+        android:id="@+id/btnAddEventsFromJson"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/btnJsonParseTest"
+        android:layout_centerHorizontal="true"
+        android:text="Add Events from JSON" />
 
 </RelativeLayout>
