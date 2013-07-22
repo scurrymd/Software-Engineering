@@ -78,45 +78,95 @@ public class MainActivity extends Activity {
 				}
 				
 				 try {
-			            // Getting Array of Contacts
+					 	String term;
+					 	String tempTermYear;
+					 	int termYear=0;
+					 	String termType=null;
+					 	int YEAROFFSET = 2000;
+					 	int currentMonth=06;
+		                int currentDay=0;
+		                int startDay=0;
+					 	term= json.getString(TAG_TERM_CODE);
+					 	tempTermYear = term.substring(0, term.length()/2);
+					 	termYear = Integer.parseInt(tempTermYear);
+					 	termYear=termYear+YEAROFFSET;
+					 	termType = term.substring(term.length()/2);
+					 	startDay=getSemesterStartDay(termType,termYear);
+					 	currentMonth=getSemesterStartMonth(termType,termYear);
+					 	
+					    // Getting Array of Classes
 			        	schedule = json.getJSONArray(TAG_CLASS_INFO);
-			             
+			        	
 			            // looping through All Classes
 			            for(int i = 0; i < schedule.length(); i++){
 			                JSONObject s = schedule.getJSONObject(i);
-			                 
-			                // Storing each json item in variable
-			                String title = s.getString(TAG_CLASS_TITLE);
 			                
-			                //The time coming from the JSON file is missing an "m" for the period (AM or PM).
-			                String MISSING_LETTER_IN_PERIOD = "m"; 
-			                String startTimeAsString = s.getString(TAG_START_TIME) + MISSING_LETTER_IN_PERIOD; //TODO: check to make sure the letter is missing first
-			                String endTimeAsString = s.getString(TAG_END_TIME) + MISSING_LETTER_IN_PERIOD; //TODO: check to make sure the letter is missing first
-			                
-			                //Hours passed into the calendar have an offset of -1.
-			                int HOUR_OFFSET = -1;
-			                int startTimeHourAsInt = parseTimeForHour(startTimeAsString) + HOUR_OFFSET;
-			                int startTimeMinuteAsInt = parseTimeForMinute(startTimeAsString);
-			                
-			                int endTimeHourAsInt = parseTimeForHour(endTimeAsString) + HOUR_OFFSET;
-			                int endTimeMinuteAsInt = parseTimeForMinute(endTimeAsString);
-			                
-			                //TODO: Get rid of duplicate code. Possibly make a seperate method for checking calendar ID.
-			                long calId;
-							calId = -1;
-							calId = checkForUcCalendarId();
-							if(calId == -1)
-							{
-								calId = createCalendar();
-							}
-							
-							//TODO: finish filling in parameters to the AddEvent method.
-							//TODO: Get classes to add on proper days of the week.
-							addEvent(calId, false, 2013, 06, 17, startTimeHourAsInt, startTimeMinuteAsInt, 0, 0, 0, endTimeHourAsInt, endTimeMinuteAsInt, null, title);
-							Intent calendar = MainActivity.this.getPackageManager().getLaunchIntentForPackage("com.android.calendar");
-							if (calendar != null)
-							startActivity(calendar);
-			            }
+				            String daysOfWeek= s.getString(TAG_DAYS_OF_WEEK);
+				            for(int j=0; j < daysOfWeek.length();j++)
+				            {
+				                char currentDayOfWeek = daysOfWeek.charAt(j);
+				                if (currentDayOfWeek=='M')
+				                {
+				                	//Monday
+				                	currentDay=startDay;
+				                }
+				                else if (currentDayOfWeek=='T')
+				                {
+				                	//Tuesday
+				                	currentDay=startDay+1;
+				                }
+				                else if (currentDayOfWeek=='W')
+				                {
+				                	//Wednesday
+				                	currentDay=startDay+2;
+				                }
+				                else if (currentDayOfWeek=='R')
+				                {
+				                	//Thursday
+				                	currentDay=startDay+3;
+				                }
+				                else if (currentDayOfWeek=='F')
+				                {
+				                	//Friday
+				                	currentDay=startDay+4;
+				                }
+				                else
+				                {
+				                	
+				                }
+				            	// Storing each json item in variable
+				                String title = s.getString(TAG_CLASS_TITLE);
+				                
+				                //The time coming from the JSON file is missing an "m" for the period (AM or PM).
+				                String MISSING_LETTER_IN_PERIOD = "m"; 
+				                String startTimeAsString = s.getString(TAG_START_TIME) + MISSING_LETTER_IN_PERIOD; //TODO: check to make sure the letter is missing first
+				                String endTimeAsString = s.getString(TAG_END_TIME) + MISSING_LETTER_IN_PERIOD; //TODO: check to make sure the letter is missing first
+				                
+				                //Hours passed into the calendar have an offset of -1.
+				                int HOUR_OFFSET = -1;
+				                int startTimeHourAsInt = parseTimeForHour(startTimeAsString) + HOUR_OFFSET;
+				                int startTimeMinuteAsInt = parseTimeForMinute(startTimeAsString);
+				                
+				                int endTimeHourAsInt = parseTimeForHour(endTimeAsString) + HOUR_OFFSET;
+				                int endTimeMinuteAsInt = parseTimeForMinute(endTimeAsString);
+				                
+				                //TODO: Get rid of duplicate code. Possibly make a seperate method for checking calendar ID.
+				                long calId;
+								calId = -1;
+								calId = checkForUcCalendarId();
+								if(calId == -1)
+								{
+									calId = createCalendar();
+								}
+								
+								//TODO: finish filling in parameters to the AddEvent method.
+								//TODO: Get classes to add on proper days of the week.
+								addEvent(calId, false, termYear, currentMonth, currentDay, startTimeHourAsInt, startTimeMinuteAsInt, 0, 0, 0, endTimeHourAsInt, endTimeMinuteAsInt, null, title);
+				            }
+				        }
+				        Intent calendar = MainActivity.this.getPackageManager().getLaunchIntentForPackage("com.android.calendar");
+				        if (calendar != null)
+						startActivity(calendar);
 			        } catch (JSONException e) {
 			            e.printStackTrace();
 			        }
@@ -449,11 +499,68 @@ public class MainActivity extends Activity {
 		}
 		return -1;	
 	}
+	public int getSemesterStartDay(String termType, int termYear)
+	{
+		int numMonday=1;
+		Calendar c = Calendar.getInstance();
+	    c.set( Calendar.YEAR, termYear );
+	    if(termType.equals("US"))
+	    {
+	    	c.set( Calendar.MONTH , Calendar.MAY);
+	    }
+	    else if(termType.equals("FS"))
+	    {
+	    	c.set( Calendar.MONTH , Calendar.AUGUST);
+	    	numMonday=4;
+	    }
+	    else	//else if(termType.equals("WS"))
+	    {
+	    	c.set( Calendar.MONTH , Calendar.JANUARY);
+	    }
+	    
+	    c.set( Calendar.DAY_OF_MONTH, 0 );
+	    c.add( Calendar.DAY_OF_MONTH, -1 );
+
+	    System.out.println( c.getTime() );
+
+	    int mondaysCount = 0;
+
+	    while ( mondaysCount != numMonday ) {
+	        c.add( Calendar.DAY_OF_MONTH, 1 );
+	        if ( c.get( Calendar.DAY_OF_WEEK ) == Calendar.MONDAY ) {
+	            mondaysCount++; 
+	        }       
+	    }
+	    
+		return c.get(Calendar.DATE);
+	}
+	
+	public int getSemesterStartMonth(String termType,int termYear)
+	{
+		int startMonth=0;
+		if(termType.equals("US"))
+	    {
+	    	startMonth=04;
+	    }
+	    else if(termType.equals("FS"))
+	    {
+	    	startMonth=07;
+	    }
+	    else 	//else if(termType.equals("WS"))
+	    {
+	    	startMonth=0;
+	    }
+		
+		return startMonth;
+	}
+	
 	
 	public static final String TAG_CLASS_INFO = "enrolledClassesInfo";
 	public static final String TAG_CLASS_TITLE = "classTitle";
 	public static final String TAG_START_TIME = "meetingStartTime";
 	public static final String TAG_END_TIME = "meetingStopTime";
+	public static final String TAG_DAYS_OF_WEEK = "daysOfWeek";
+	public static final String TAG_TERM_CODE = "termCode";
 	
 	//TODO: Find a way to put this in the JSONParser class and call on it from there.
 	public JSONObject getJSONFromFile() throws IOException
