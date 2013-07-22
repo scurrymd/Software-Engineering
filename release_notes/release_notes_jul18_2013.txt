@@ -8,3 +8,8 @@ July 11, 2013:
 
 Comments:
 
+1. Complete schedule population for entire week or semeester
+2. Clean-up add event + add description, room#
+3. Clean-up UI (bigger and neat buttons)
+4. Continue working on test cases/coverage (generate new test cases for new features)
+5. Get in touch with UC mobile app owner in preparation for "delivery". Get Asif's help!
