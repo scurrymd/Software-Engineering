@@ -1,0 +1,12 @@
+# view AndroidManifest.xml #generated:29
+-keep class com.example.ucschedule.JSONtest { <init>(...); }
+
+# view AndroidManifest.xml #generated:28
+-keep class com.example.ucschedule.LoginActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:19
+-keep class com.example.ucschedule.MainActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:30
+-keep class com.example.ucschedule.SingleMenuItemActivity { <init>(...); }
+
