@@ -1,0 +1,12 @@
+UC Schedule:
+
+July 25, 2013:
+
+
+
+• Implemented shortened Arthur's schedule into calendar for an entire week
+• Added test cases for JSON file
+• Code coverage is now working
+
+
+Comments:
