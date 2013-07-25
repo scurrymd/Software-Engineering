@@ -102,6 +102,7 @@ public class MainActivity extends Activity {
 			                JSONObject s = schedule.getJSONObject(i);
 			                
 				            String daysOfWeek= s.getString(TAG_DAYS_OF_WEEK);
+				            
 				            for(int j=0; j < daysOfWeek.length();j++)
 				            {
 				                char currentDayOfWeek = daysOfWeek.charAt(j);
@@ -150,6 +151,9 @@ public class MainActivity extends Activity {
 				                int endTimeHourAsInt = parseTimeForHour(endTimeAsString) + HOUR_OFFSET;
 				                int endTimeMinuteAsInt = parseTimeForMinute(endTimeAsString);
 				                
+				                String location= s.getString(TAG_ROOM_NUMBER) + " " + s.getString(TAG_BUILDING);
+				                String professor = "Professor: " + s.getString(TAG_INSTRUCTOR_NAME);
+				                
 				                //TODO: Get rid of duplicate code. Possibly make a seperate method for checking calendar ID.
 				                long calId;
 								calId = -1;
@@ -161,7 +165,7 @@ public class MainActivity extends Activity {
 								
 								//TODO: finish filling in parameters to the AddEvent method.
 								//TODO: Get classes to add on proper days of the week.
-								addEvent(calId, false, termYear, currentMonth, currentDay, startTimeHourAsInt, startTimeMinuteAsInt, 0, 0, 0, endTimeHourAsInt, endTimeMinuteAsInt, null, title);
+								addEvent(calId, false, termYear, currentMonth, currentDay, startTimeHourAsInt, startTimeMinuteAsInt, 0, 0, 0, endTimeHourAsInt, endTimeMinuteAsInt, null, title,location,professor);
 				            }
 				        }
 				        Intent calendar = MainActivity.this.getPackageManager().getLaunchIntentForPackage("com.android.calendar");
@@ -206,7 +210,7 @@ public class MainActivity extends Activity {
 				{
 					calId = createCalendar();
 				}
-				addEvent(calId, false, 2013, 06, 11, 17, 30, 0, 0, 0, 18, 00, null, "Add Event");
+				addEvent(calId, false, 2013, 06, 11, 17, 30, 0, 0, 0, 18, 00, null, "Add Event","200 Baldwin","Me");
 				Intent i = MainActivity.this.getPackageManager().getLaunchIntentForPackage("com.android.calendar");
 				if (i != null)
 				startActivity(i);
@@ -268,6 +272,8 @@ public class MainActivity extends Activity {
 	 * @param endMinute
 	 * @param timeZone
 	 * @param title
+	 * @param location,
+	 * @param professor,
 	 * @return long eventID
 	 */
 	public long addEvent(
@@ -284,7 +290,9 @@ public class MainActivity extends Activity {
 			int endHour,
 			int endMinute,
 			String timeZone, 
-			String title)
+			String title,
+			String location,
+			String professor)
 	
 	{	
 		long eventId = 0;
@@ -329,13 +337,14 @@ public class MainActivity extends Activity {
 					values.put(Events.DTEND, end);
 					
 					values.put(Events.TITLE, title);
-					values.put(Events.EVENT_LOCATION, "Baldwin");
+					values.put(Events.EVENT_LOCATION, location);
 					values.put(Events.CALENDAR_ID, calendarId);
 
 					values.put(Events.EVENT_TIMEZONE, "America/New_York");
 					values.put(Events.DESCRIPTION, 
-					      "The agenda or some description of the event");
+					      professor);
 					values.put(Events.ALL_DAY, 0);
+					values.put(Events.RRULE,"FREQ=WEEKLY;COUNT=14;");
 					
 					Uri uri1 = getContentResolver().insert(Events.CONTENT_URI, values);
 					
@@ -499,6 +508,13 @@ public class MainActivity extends Activity {
 		}
 		return -1;	
 	}
+	/**
+	 * Gets the first day of the current semester.
+	 * 
+	 * @param termType
+	 * @param termYear
+	 * @return int day
+	 */
 	public int getSemesterStartDay(String termType, int termYear)
 	{
 		int numMonday=1;
@@ -535,6 +551,13 @@ public class MainActivity extends Activity {
 		return c.get(Calendar.DATE);
 	}
 	
+	/**
+	 * Gets the start month of the current semester.
+	 * 
+	 * @param termType
+	 * @param termYear
+	 * @return int startMonth
+	 */
 	public int getSemesterStartMonth(String termType,int termYear)
 	{
 		int startMonth=0;
@@ -561,6 +584,9 @@ public class MainActivity extends Activity {
 	public static final String TAG_END_TIME = "meetingStopTime";
 	public static final String TAG_DAYS_OF_WEEK = "daysOfWeek";
 	public static final String TAG_TERM_CODE = "termCode";
+	public static final String TAG_BUILDING = "buildingCode";
+	public static final String TAG_ROOM_NUMBER = "roomNumber";
+    public static final String TAG_INSTRUCTOR_NAME = "instructorName";
 	
 	//TODO: Find a way to put this in the JSONParser class and call on it from there.
 	public JSONObject getJSONFromFile() throws IOException
