@@ -13,3 +13,8 @@ July 25, 2013:
 
 
 Comments:
+
+Fix calendar duplicate add events
+Account for user changes
+Add test cases
+Update Requirements document- function/non-functional requirements(state of functionality)
