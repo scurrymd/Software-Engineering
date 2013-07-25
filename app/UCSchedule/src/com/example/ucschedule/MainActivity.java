@@ -50,10 +50,6 @@ public class MainActivity extends Activity {
 		/**
 		 * Button to go to the login page
 		 */
-		Button goToCalendar = (Button) findViewById(R.id.btnGoToCalendar);
-		/**
-		 * Button to open the android calendar
-		 */
 		Button goToAddEvent = (Button) findViewById(R.id.btnGoToAddEvent);
 		/**
 		 * Button to open the android calendar
@@ -215,22 +211,6 @@ public class MainActivity extends Activity {
 				if (i != null)
 				startActivity(i);
 
-			}
-		});
-		
-		
-		goToCalendar.setOnClickListener(new View.OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				
-				/**
-				 * function to open the android calendar
-				 */
-				Intent i = MainActivity.this.getPackageManager().getLaunchIntentForPackage("com.android.calendar");
-				if (i != null)
-				startActivity(i);
-				
 			}
 		});
 		

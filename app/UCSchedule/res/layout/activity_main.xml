@@ -38,14 +38,6 @@
         android:text="@string/strLoginBtn" />
 
     <Button
-        android:id="@+id/btnGoToCalendar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/btnGoToAddEvent"
-        android:layout_centerHorizontal="true"
-        android:text="@string/strCalendar" />
-
-    <Button
         android:id="@+id/btnAddEventsFromJson"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

@@ -15,18 +15,20 @@
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme" >
+        android:theme="@android:style/Theme.Light">:
         <activity
             android:name="com.example.ucschedule.MainActivity"
             android:label="@string/app_name" >
+        </activity>
+        <activity android:name="LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="LoginActivity"></activity>
-        <activity android:name="JSONtest"></activity>
+        <activity android:name="JSONtest"
+            android:theme="@android:style/Theme.Light.NoTitleBar"></activity>
         <activity
             android:label="Single Menu Item"
             android:name=".SingleMenuItemActivity" >
