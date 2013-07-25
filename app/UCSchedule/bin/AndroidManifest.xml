@@ -27,7 +27,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="JSONtest"
+        <activity android:name="ScheduleView"
             android:theme="@android:style/Theme.Light.NoTitleBar"></activity>
         <activity
             android:label="Single Menu Item"

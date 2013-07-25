@@ -222,7 +222,7 @@ public class MainActivity extends Activity {
 				/**
 				 * function to open the android calendar
 				 */
-				Intent n = new Intent(MainActivity.this,JSONtest.class);
+				Intent n = new Intent(MainActivity.this,ScheduleView.class);
 			 	startActivity(n);
 				
 			}

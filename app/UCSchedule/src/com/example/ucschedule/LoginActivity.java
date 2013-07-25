@@ -50,7 +50,7 @@ public class LoginActivity extends Activity {
 				if(username.equalsIgnoreCase("johns2au") && password.equals("test"))
 				{
 					//Start JSON listView activity if the credentials match.
-					Intent n = new Intent(LoginActivity.this,JSONtest.class);
+					Intent n = new Intent(LoginActivity.this,ScheduleView.class);
 				 	startActivity(n);
 				}
 				else
