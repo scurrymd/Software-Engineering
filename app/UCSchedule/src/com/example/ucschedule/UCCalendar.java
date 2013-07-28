@@ -1,10 +1,5 @@
 package com.example.ucschedule;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Locale;
-
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -56,7 +51,11 @@ public class UCCalendar {
 			return CalendarId;
 		}  
 
-	public long createCalendar()
+	/**
+	 * Creates a new calendar called "UC Calendar".
+	 * @return CalendarID
+	 */
+	public long createUCCalendar()
 	{
 		long calendarId;
 		

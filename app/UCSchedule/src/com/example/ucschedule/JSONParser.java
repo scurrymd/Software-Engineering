@@ -8,6 +8,10 @@ import java.io.Reader;
 import java.io.StringWriter;
 import java.io.UnsupportedEncodingException;
 import java.io.Writer;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -17,6 +21,7 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.content.Context;
 import android.util.Log;
 
 /**
@@ -28,11 +33,11 @@ public class JSONParser {
 	static JSONObject jObj = null;
 	static String json = "";
 
-	// constructor
-	public JSONParser() {
-
-	}
-
+	protected Context context;
+	public JSONParser(Context context){
+        this.context = context;
+    }
+	
 	//TODO: This is only sample code.
 	public JSONObject getJSONFromUrl(String url) {
 
@@ -82,9 +87,9 @@ public class JSONParser {
 	
 	//TODO: Move this method to this class and get it to work properly outside of an actvity class.
 	
-/*	public JSONObject getJSONFromFile()
+	public JSONObject getJSONFromFile() throws IOException
 	{
-		InputStream is = getResources().openRawResource(R.raw.schedule);
+		InputStream is = context.getResources().openRawResource(R.raw.schedule);
 		Writer writer = new StringWriter();
 		char[] buffer = new char[1024];
 		try {
@@ -98,6 +103,7 @@ public class JSONParser {
 		}
 
 		String jsonString = writer.toString();
+		JSONObject jObj=null;
 		
 		// try parse the string to a JSON object
 		try {
@@ -105,9 +111,50 @@ public class JSONParser {
 		} catch (JSONException e) {
 			Log.e("JSON Parser", "Error parsing data " + e.toString());
 		}
-
-		// return JSON String
+			
 		return jObj;
+		// return JSON String
 
-	}*/
+	}
+	
+	/**
+	 * Extracts the hour of a string showing time in the format of "hh:mma" time as an int.
+	 * @param time (a string in the form of "hh:mma" where h= hour, m = minute, and a = am or pm)
+	 * @return int hour (the hour as an int of the time entered in as a parameter)
+	 */
+	public int parseTimeForHour(String time)
+	{
+		try {
+			Date date = new SimpleDateFormat("hh:mma", Locale.ENGLISH).parse(time);
+			
+			@SuppressWarnings("deprecation")
+			int hour = date.getHours();
+			return hour;
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return -1;
+	}
+	
+	//TODO: make private and create test cases
+	/**
+	 * Extracts the minute of a string showing time in the format of "hh:mma" time as an int.
+	 * @param time (a string in the form of "hh:mma" where h= hour, m = minute, and a = am or pm)
+	 * @return int minute (the minute as an int of the time entered in as a parameter)
+	 */
+	public int parseTimeForMinute(String time)
+	{
+		try {
+			Date date = new SimpleDateFormat("hh:mma", Locale.ENGLISH).parse(time);
+			
+			@SuppressWarnings("deprecation")
+			int minute = date.getMinutes();
+			return minute;
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return -1;	
+	}
 }

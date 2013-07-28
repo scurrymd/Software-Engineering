@@ -67,7 +67,7 @@
         android:layout_below="@+id/etPassword"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
-        android:text="Invalid Username and Password Combination"
+        android:text="@string/strInvalidCredentials"
         android:textColor="#FF0033"
         android:visibility="invisible" />
 

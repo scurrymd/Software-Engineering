@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal">  
@@ -7,9 +7,10 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
-		<!-- Name Label -->
+		<!-- Class Name Label -->
         <TextView
-            android:id="@+id/name"
+            android:textIsSelectable="true"
+            android:id="@+id/className"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:textColor="#FF0033"
@@ -17,6 +18,7 @@
             android:textStyle="bold"
             android:paddingTop="6dip"
             android:paddingBottom="2dip" />
+        <!-- Linear layout for start time -->
         <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
@@ -27,10 +29,10 @@
 	            android:textColor="#5d5d5d"
 	            android:gravity="left"
 	            android:textStyle="bold"
-	            android:text="Start: " >
+	            android:text="@string/strStart" >
 	        </TextView>
-			<!-- Description label -->
 	        <TextView
+	            android:textIsSelectable="true"
 	            android:id="@+id/startTime"
 	            android:layout_width="wrap_content"
 	            android:layout_height="wrap_content"
@@ -39,7 +41,7 @@
 	            android:gravity="left">
 	        </TextView>
         </LinearLayout>
-        <!-- Linear layout for cost and price Cost: Rs.100 -->
+        <!-- Linear layout for end time -->
         <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
@@ -51,10 +53,10 @@
 	            android:textColor="#5d5d5d"
 	            android:gravity="left"
 	            android:textStyle="bold"
-	            android:text="End: " >
+	            android:text="@string/strEnd" >
 	        </TextView>
-	        <!-- Price Label -->
 	        <TextView
+	            android:textIsSelectable="true"
 	            android:id="@+id/endTime"
 	            android:layout_width="wrap_content"
 	            android:layout_height="wrap_content"
@@ -63,6 +65,7 @@
 	            android:gravity="left">
 	        </TextView>
         </LinearLayout>
+        <!-- Linear layout for days of the week -->
         <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
@@ -74,10 +77,11 @@
 	            android:textColor="#5d5d5d"
 	            android:gravity="left"
 	            android:textStyle="bold"
-	            android:text="Days: " >
+	            android:text="@string/strEnd" >
 	        </TextView>
 	        <!-- Price Label -->
 	        <TextView
+	            android:textIsSelectable="true"
 	            android:id="@+id/daysOfWeek"
 	            android:layout_width="wrap_content"
 	            android:layout_height="wrap_content"
@@ -88,4 +92,4 @@
       	</LinearLayout>
     </LinearLayout>
 
-</LinearLayout>
+</RelativeLayout>

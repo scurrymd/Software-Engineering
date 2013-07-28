@@ -13,5 +13,11 @@
     <string name="strDate">Enter Date:</string>
     <string name="strStartTime">Start Time:</string>
     <string name="strEndTime">End Time:</string>
+    <string name="strCancel">Cancel</string>
+    <string name="strConfirm">Confirm</string>
+    <string name="strInvalidCredentials">Invalid Username and Password Combination</string>
+    <string name="strStart">Start: </string>
+    <string name="strEnd">End: </string>
+    <string name="strDays">Days: </string>
 
 </resources>

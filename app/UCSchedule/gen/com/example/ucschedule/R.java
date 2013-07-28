@@ -24,7 +24,7 @@ public final class R {
         public static final int ic_launcher=0x7f020000;
     }
     public static final class id {
-        public static final int action_settings=0x7f09001d;
+        public static final int action_settings=0x7f09001a;
         public static final int btnAddEvent=0x7f090008;
         public static final int btnAddEventsFromJson=0x7f090015;
         public static final int btnCancel=0x7f09000a;
@@ -35,8 +35,8 @@ public final class R {
         public static final int btnGoToMainTest=0x7f090009;
         public static final int btnJsonParseTest=0x7f090013;
         public static final int btnLogin=0x7f090011;
+        public static final int className=0x7f090016;
         public static final int daysOfWeek=0x7f090019;
-        public static final int email_label=0x7f09001b;
         public static final int endTime=0x7f090018;
         public static final int etDate=0x7f090004;
         public static final int etEndTime=0x7f090007;
@@ -44,9 +44,6 @@ public final class R {
         public static final int etStartTime=0x7f090006;
         public static final int etTitle=0x7f090005;
         public static final int etUsername=0x7f09000d;
-        public static final int mobile_label=0x7f09001c;
-        public static final int name=0x7f090016;
-        public static final int name_label=0x7f09001a;
         public static final int startTime=0x7f090017;
         public static final int tvDate=0x7f090001;
         public static final int tvEndTime=0x7f090003;
@@ -61,7 +58,6 @@ public final class R {
         public static final int activity_login=0x7f030002;
         public static final int activity_main=0x7f030003;
         public static final int list_item=0x7f030004;
-        public static final int single_list_item=0x7f030005;
     }
     public static final class menu {
         public static final int main=0x7f080000;
@@ -74,11 +70,17 @@ public final class R {
         public static final int app_name=0x7f060000;
         public static final int strBack=0x7f060007;
         public static final int strCalendar=0x7f060006;
+        public static final int strCancel=0x7f06000c;
+        public static final int strConfirm=0x7f06000d;
         public static final int strDate=0x7f060009;
+        public static final int strDays=0x7f060011;
+        public static final int strEnd=0x7f060010;
         public static final int strEndTime=0x7f06000b;
+        public static final int strInvalidCredentials=0x7f06000e;
         public static final int strLogin=0x7f060002;
         public static final int strLoginBtn=0x7f060005;
         public static final int strPassword=0x7f060004;
+        public static final int strStart=0x7f06000f;
         public static final int strStartTime=0x7f06000a;
         public static final int strTitle=0x7f060008;
         public static final int strUsername=0x7f060003;
