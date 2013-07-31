@@ -166,12 +166,19 @@ public class ScheduleView extends ListActivity {
 							if(calId == -1)
 							{
 								calId = cal.createUCCalendar();
+								event.addEvent(calId, false, termYear, currentMonth, currentDay, startTimeHourAsInt, startTimeMinuteAsInt, 0, 0, 0, endTimeHourAsInt, endTimeMinuteAsInt, null, title,location,professor);
+							}
+							else
+							{
+								boolean duplicateEvent=false;
+								duplicateEvent=cal.CheckDuplicateEvent(calId,termYear,currentMonth,currentDay,startTimeHourAsInt,startTimeMinuteAsInt,endTimeHourAsInt,endTimeMinuteAsInt,title);
+								if(duplicateEvent==false)
+								{
+									event.addEvent(calId, false, termYear, currentMonth, currentDay, startTimeHourAsInt, startTimeMinuteAsInt, 0, 0, 0, endTimeHourAsInt, endTimeMinuteAsInt, null, title,location,professor);
+								}
 							}
 							
-							
 							//TODO: finish filling in parameters to the AddEvent method.
-							//TODO: Get classes to add on proper days of the week.
-							event.addEvent(calId, false, termYear, currentMonth, currentDay, startTimeHourAsInt, startTimeMinuteAsInt, 0, 0, 0, endTimeHourAsInt, endTimeMinuteAsInt, null, title,location,professor);
 						}
 					}
 					Intent calendar = ScheduleView.this.getPackageManager().getLaunchIntentForPackage("com.android.calendar");

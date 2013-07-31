@@ -1,11 +1,16 @@
 package com.example.ucschedule;
 
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+import java.util.TimeZone;
+
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.net.Uri;
 import android.provider.CalendarContract;
 import android.provider.CalendarContract.Calendars;
+import android.provider.CalendarContract.Instances;
 
 public class UCCalendar {
 
@@ -100,5 +105,61 @@ public class UCCalendar {
 		
 		return calendarId;
 		
+	}
+	
+	/**
+	 * Checks if there is already an event in the same calendar .
+	 * 
+	 * @param calId
+	 * @param startYear
+	 * @param startMonth
+	 * @param startDay
+	 * @param startHour
+	 * @param startMinute
+	 * @param endHour
+	 * @param endMinute
+	 * @param title
+	 * @return boolean duplicateEvent
+	 */
+	boolean CheckDuplicateEvent(long calId,int startYear,int startMonth,int startDay,int startHour,int startMinute,int endHour,int endMinute,String title)
+	{
+		boolean duplicateEvent=false;
+		int SECOND = 0;
+		int MILLISECOND = 0;
+		
+		Calendar Startcal = new GregorianCalendar(startYear, startMonth, startDay);
+		Startcal.setTimeZone(TimeZone.getTimeZone("EST"));
+		Startcal.set(Calendar.HOUR, startHour);
+		Startcal.set(Calendar.MINUTE, startMinute);
+		Startcal.set(Calendar.SECOND, SECOND);
+		Startcal.set(Calendar.MILLISECOND, MILLISECOND);
+		long start = Startcal.getTimeInMillis();
+		
+		Calendar Endcal = new GregorianCalendar(startYear, startMonth, startDay);
+		Endcal.setTimeZone(TimeZone.getTimeZone("EST"));
+		Endcal.set(Calendar.HOUR, endHour);
+		Endcal.set(Calendar.MINUTE, endMinute);
+		Endcal.set(Calendar.SECOND, SECOND);
+		Endcal.set(Calendar.MILLISECOND, MILLISECOND);
+		long end = Endcal.getTimeInMillis();
+		String[] proj = new String[]
+		{
+			Instances._ID,
+			Instances.TITLE,
+	        Instances.BEGIN, 
+	        Instances.END, 
+	    };
+		Cursor cursor = 
+		Instances.query(context.getContentResolver(), proj, start, end);
+		if (cursor.getCount() > 0) {
+			String[] collisonEvents = cursor.getColumnNames();
+			for(int i = 0;i < cursor.getCount();i++)
+				if(collisonEvents[i].equals(title))
+				{
+					duplicateEvent = true;
+					break;
+				}
+		}
+		return duplicateEvent;
 	}
 }
