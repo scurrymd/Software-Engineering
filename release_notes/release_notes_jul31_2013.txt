@@ -1,0 +1,16 @@
+UC Schedule:
+
+July 25, 2013:
+
+
+
+• Refactored our code to make it cleaner.
+
+	• Created an Event class to handle methods dealing with calendar events.
+	• Created a UCCalendar class to handle the creation of the UC Calendar.
+	• Created a JSONParser class to handle all the JSON parsing.
+• Added functionality to prevent adding duplicate events.
+• Updated Requirements and Specs documents
+
+
+Comments:
