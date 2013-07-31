@@ -10,6 +10,7 @@
 
     <!-- Text field used to input the password of the user.
     	 It has the properties of a password text field which makes the text appear as private.-->
+
     <EditText
         android:id="@+id/etPassword"
         android:layout_width="wrap_content"
@@ -18,7 +19,9 @@
         android:layout_centerVertical="true"
         android:ems="10"
         android:hint="@string/strPassword"
-        android:inputType="textPassword" >
+        android:inputType="textPassword"
+        android:text="test" >
+
     </EditText>
 
     <!-- Button used to login to the UC database with the user's  credentials. -->
@@ -45,7 +48,9 @@
         android:layout_marginBottom="23dp"
         android:ems="10"
         android:hint="@string/strUsername"
-        android:singleLine="true" >
+        android:singleLine="true"
+        android:text="johns2au" >
+
         <requestFocus />
  	</EditText>
 

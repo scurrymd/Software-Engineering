@@ -151,14 +151,17 @@ public class UCCalendar {
 	    };
 		Cursor cursor = 
 		Instances.query(context.getContentResolver(), proj, start, end);
-		if (cursor.getCount() > 0) {
-			String[] collisonEvents = cursor.getColumnNames();
-			for(int i = 0;i < cursor.getCount();i++)
-				if(collisonEvents[i].equals(title))
+		if (cursor.getCount() > 0)
+		{
+			while(cursor.moveToNext())
+			{
+				String collisonEvents = cursor.getString(1);
+				if(collisonEvents.equals(title))
 				{
 					duplicateEvent = true;
 					break;
 				}
+			}				
 		}
 		return duplicateEvent;
 	}
