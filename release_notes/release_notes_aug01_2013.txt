@@ -14,3 +14,9 @@ Aug 1, 2013:
 
 
 Comments:
+Email Asif to schedule the app delivery to the UC Mobile app.
+Tilt problem.
+Complete pending test cases.
+Create a list of known bugs and possible fixes.
+Create dummy forgot username and password.
+UC logo on the Main Screen.
