@@ -170,9 +170,9 @@ public class ScheduleView extends ListActivity {
 							}
 							else
 							{
-								boolean duplicateEvent=false;
+								int duplicateEvent=0;
 								duplicateEvent=cal.CheckDuplicateEvent(calId,termYear,currentMonth,currentDay,startTimeHourAsInt,startTimeMinuteAsInt,endTimeHourAsInt,endTimeMinuteAsInt,title);
-								if(duplicateEvent==false)
+								if(duplicateEvent==0)
 								{
 									event.addEvent(calId, false, termYear, currentMonth, currentDay, startTimeHourAsInt, startTimeMinuteAsInt, 0, 0, 0, endTimeHourAsInt, endTimeMinuteAsInt, null, title,location,professor);
 								}

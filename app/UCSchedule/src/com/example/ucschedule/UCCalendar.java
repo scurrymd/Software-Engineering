@@ -108,7 +108,7 @@ public class UCCalendar {
 	}
 	
 	/**
-	 * Checks if there is already an event in the same calendar .
+	 * Checks if there is already a duplicate event in the same calendar .
 	 * 
 	 * @param calId
 	 * @param startYear
@@ -121,9 +121,9 @@ public class UCCalendar {
 	 * @param title
 	 * @return boolean duplicateEvent
 	 */
-	boolean CheckDuplicateEvent(long calId,int startYear,int startMonth,int startDay,int startHour,int startMinute,int endHour,int endMinute,String title)
+	public int CheckDuplicateEvent(long calId,int startYear,int startMonth,int startDay,int startHour,int startMinute,int endHour,int endMinute,String title)
 	{
-		boolean duplicateEvent=false;
+		int duplicateEvent=0;
 		int SECOND = 0;
 		int MILLISECOND = 0;
 		
@@ -158,7 +158,7 @@ public class UCCalendar {
 				String collisonEvents = cursor.getString(1);
 				if(collisonEvents.equals(title))
 				{
-					duplicateEvent = true;
+					duplicateEvent = 1;
 					break;
 				}
 			}				

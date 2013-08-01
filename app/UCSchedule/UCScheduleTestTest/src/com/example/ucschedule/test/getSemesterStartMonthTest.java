@@ -10,14 +10,19 @@ public class getSemesterStartMonthTest extends TestCase {
 	protected void tearDown() throws Exception {
 		 super.tearDown();
 		 }
-	public void testGoodCase() {
+	public void testSummerTermCase() {
 		MainActivity main = new MainActivity();
 		assertEquals("Good Test Case is valid (not -1)", 4 ,main.getSemesterStartMonth("US", 2013));
 		//fail("Not yet implemented");
 	}
-	public void testEmptyTermType() {
+	public void testFallTermType() {
 		MainActivity main = new MainActivity();
-		assertEquals("Good Test Case is valid (not -1)", -1 ,main.getSemesterStartMonth("", 2013));
+		assertEquals("Good Test Case is valid (not -1)", 7 ,main.getSemesterStartMonth("FS", 2013));
+		//fail("Not yet implemented");
+	}
+	public void testWinterTermType() {
+		MainActivity main = new MainActivity();
+		assertEquals("Good Test Case is valid (not -1)", 0 ,main.getSemesterStartMonth("WS", 2013));
 		//fail("Not yet implemented");
 	}
 	public void testZeroTermYear() {
