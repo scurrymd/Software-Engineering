@@ -1,7 +1,8 @@
 package com.example.ucschedule.test;
 import junit.framework.TestCase;
+import android.content.Context;
 
-import com.example.ucschedule.MainActivity;
+import com.example.ucschedule.Event;
 
 public class getSemesterStartDayTest extends TestCase {
 	protected void setUp() throws Exception {
@@ -11,23 +12,27 @@ public class getSemesterStartDayTest extends TestCase {
 		 super.tearDown();
 		 }
 	public void testSummerTermType() {
-		MainActivity main = new MainActivity();
-		assertEquals("Good Test Case is valid (not -1)", 6 ,main.getSemesterStartDay("US", 2013));
+		Context context = null;
+		Event testEvent = new Event(context);
+		assertEquals("Good Test Case is valid (not -1)", 6 ,testEvent.getSemesterStartDay("US", 2013));
 		//fail("Not yet implemented");
 	}
 	public void testFallTermType() {
-		MainActivity main = new MainActivity();
-		assertEquals("Good Test Case is valid (not -1)", 26 ,main.getSemesterStartDay("FS", 2013));
+		Context context = null;
+		Event testEvent = new Event(context);
+		assertEquals("Good Test Case is valid (not -1)", 26 ,testEvent.getSemesterStartDay("FS", 2013));
 		//fail("Not yet implemented");
 	}
 	public void testWinterTermType() {
-		MainActivity main = new MainActivity();
-		assertEquals("Good Test Case is valid (not -1)", 7 ,main.getSemesterStartDay("WS", 2013));
+		Context context = null;
+		Event testEvent = new Event(context);
+		assertEquals("Good Test Case is valid (not -1)", 7 ,testEvent.getSemesterStartDay("WS", 2013));
 		//fail("Not yet implemented");
 	}
 	public void testZeroTermYear() {
-		MainActivity main = new MainActivity();
-		assertEquals("Good Test Case is valid (not -1)", -1 ,main.getSemesterStartDay("US",0));
+		Context context = null;
+		Event testEvent = new Event(context);
+		assertEquals("Good Test Case is valid (not -1)", -1 ,testEvent.getSemesterStartDay("US",0));
 		//fail("Not yet implemented");
 	}
 
