@@ -1,4 +1,4 @@
-C:\Users\Arthur - User\Documents\GitHub\Software-Engineering\app\UCSchedule\bin\MainActivity.ap_ \
+C:\Users\Arthur - User\Documents\GitHub\Software-Engineering\app\UCSchedule\gen\com\example\ucschedule\R.java \
  : C:\Users\Arthur - User\Documents\GitHub\Software-Engineering\app\UCSchedule\res\drawable-hdpi\ic_launcher.png \
 C:\Users\Arthur - User\Documents\GitHub\Software-Engineering\app\UCSchedule\res\drawable-mdpi\ic_launcher.png \
 C:\Users\Arthur - User\Documents\GitHub\Software-Engineering\app\UCSchedule\res\drawable-xhdpi\ic_launcher.png \
