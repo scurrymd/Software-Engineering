@@ -21,13 +21,8 @@ public class LoginActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_login);
 		
+		//Button to check the username and password entered in the EditText
 		Button CheckID = (Button) findViewById(R.id.btnLogin);
-		/**
-		 * Button to check the username and password entered in the EditText
-		 */
-		
-		//Button to open the android calendar
-		Button goToCalendar = (Button) findViewById(R.id.btnGoToCalendar);
 		
 		CheckID.setOnClickListener(new View.OnClickListener() {
 			
@@ -59,31 +54,12 @@ public class LoginActivity extends Activity {
 					TextView invalidCredentials = (TextView) findViewById(R.id.tvInvalidUnPw);
 					invalidCredentials.setVisibility(View.VISIBLE);
 				}
-	
-				
-		 //TODO: Implement this feature, waiting on UCIT
-				
-			}
-		});
-		
-		
-		goToCalendar.setOnClickListener(new View.OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				
-				Intent i = LoginActivity.this.getPackageManager().getLaunchIntentForPackage("com.android.calendar");
-				if (i != null)
-				startActivity(i);
-				
 			}
 		});
 	}
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		//getMenuInflater().inflate(R.menu.login, menu);
 		return true;
 	}
 	

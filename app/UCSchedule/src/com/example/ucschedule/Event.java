@@ -116,10 +116,6 @@ public class Event {
 			   } while (calCursor.moveToNext() && checkEventAlreadySet == false);
 			}
 		
-		/*
-		 * TODO: Capture Event ID
-		 */
-		
 		if(eventId != 0)
 		{
 			return eventId;

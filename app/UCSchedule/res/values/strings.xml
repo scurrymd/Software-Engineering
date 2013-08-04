@@ -19,5 +19,6 @@
     <string name="strStart">Start: </string>
     <string name="strEnd">End: </string>
     <string name="strDays">Days: </string>
+    <string name="strUCLogoDesc">University of Cincinnati Logo</string>
 
 </resources>

@@ -159,7 +159,6 @@ public class ScheduleView extends ListActivity {
 							String location= s.getString(ScheduleTags.TAG_ROOM_NUMBER) + " " + s.getString(ScheduleTags.TAG_BUILDING);
 							String professor = "Professor: " + s.getString(ScheduleTags.TAG_INSTRUCTOR_NAME);
 							
-							//TODO: Get rid of duplicate code. Possibly make a seperate method for checking calendar ID.
 							long calId;
 							calId = -1;
 							calId = cal.checkForUcCalendarId();
@@ -177,8 +176,7 @@ public class ScheduleView extends ListActivity {
 									event.addEvent(calId, false, termYear, currentMonth, currentDay, startTimeHourAsInt, startTimeMinuteAsInt, 0, 0, 0, endTimeHourAsInt, endTimeMinuteAsInt, null, title,location,professor);
 								}
 							}
-							
-							//TODO: finish filling in parameters to the AddEvent method.
+
 						}
 					}
 					Intent calendar = ScheduleView.this.getPackageManager().getLaunchIntentForPackage("com.android.calendar");

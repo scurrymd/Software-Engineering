@@ -1,95 +1,103 @@
-<?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="fill_parent"
-    android:layout_height="wrap_content"
-    android:orientation="horizontal">  
-    <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
-		<!-- Class Name Label -->
-        <TextView
-            android:textIsSelectable="true"
-            android:id="@+id/className"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:textColor="#FF0033"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            android:paddingTop="6dip"
-            android:paddingBottom="2dip" />
-        <!-- Linear layout for start time -->
-        <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-	        <TextView
-	            android:layout_width="wrap_content"
-	            android:layout_height="wrap_content"
-	            android:textColor="#5d5d5d"
-	            android:gravity="left"
-	            android:textStyle="bold"
-	            android:text="@string/strStart" >
-	        </TextView>
-	        <TextView
-	            android:textIsSelectable="true"
-	            android:id="@+id/startTime"
-	            android:layout_width="wrap_content"
-	            android:layout_height="wrap_content"
-	            android:textColor="#acacac" 
-	            android:textStyle="bold"
-	            android:gravity="left">
-	        </TextView>
-        </LinearLayout>
-        <!-- Linear layout for end time -->
-        <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-	        <!-- Cost Label -->
-	        <TextView
-	            android:layout_width="wrap_content"
-	            android:layout_height="wrap_content"
-	            android:textColor="#5d5d5d"
-	            android:gravity="left"
-	            android:textStyle="bold"
-	            android:text="@string/strEnd" >
-	        </TextView>
-	        <TextView
-	            android:textIsSelectable="true"
-	            android:id="@+id/endTime"
-	            android:layout_width="wrap_content"
-	            android:layout_height="wrap_content"
-	            android:textColor="#acacac" 
-	            android:textStyle="bold"
-	            android:gravity="left">
-	        </TextView>
-        </LinearLayout>
-        <!-- Linear layout for days of the week -->
-        <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-	        <!-- Cost Label -->
-	        <TextView
-	            android:layout_width="wrap_content"
-	            android:layout_height="wrap_content"
-	            android:textColor="#5d5d5d"
-	            android:gravity="left"
-	            android:textStyle="bold"
-	            android:text="@string/strEnd" >
-	        </TextView>
-	        <!-- Price Label -->
-	        <TextView
-	            android:textIsSelectable="true"
-	            android:id="@+id/daysOfWeek"
-	            android:layout_width="wrap_content"
-	            android:layout_height="wrap_content"
-	            android:textColor="#acacac" 
-	            android:textStyle="bold"
-	            android:gravity="left">
-	        </TextView>
-      	</LinearLayout>
-    </LinearLayout>
+<?xml version="1.0" encoding="utf-8"?>  
+<LinearLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	android:orientation="vertical">
+	
+	<!-- Class Name Label -->
+	<TextView
+		android:textIsSelectable="true"
+		android:id="@+id/className"
+		android:layout_width="fill_parent"
+		android:layout_height="wrap_content"
+		android:textColor="#FF0033"
+		android:textSize="16sp"
+		android:textStyle="bold"
+		android:paddingTop="6dip"
+		android:paddingBottom="2dip" />
+	
+	<!-- Linear layout for start time -->
+	<LinearLayout
+		android:layout_width="fill_parent"
+		android:layout_height="wrap_content"
+		android:orientation="horizontal">
+		
+		<!-- Start Time Label -->
+		<TextView
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:textColor="#5d5d5d"
+			android:gravity="left"
+			android:textStyle="bold"
+			android:text="@string/strStart" >
+		</TextView>
+		
+		<!-- Start Time -->
+		<TextView
+			android:textIsSelectable="true"
+			android:id="@+id/startTime"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:textColor="#acacac" 
+			android:textStyle="bold"
+			android:gravity="left">
+		</TextView>
+		</LinearLayout>
+		
+		<!-- Linear layout for end time -->
+		<LinearLayout
+			android:layout_width="fill_parent"
+			android:layout_height="wrap_content"
+			android:orientation="horizontal">
+			
+			<!-- End Time Label -->
+			<TextView
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:textColor="#5d5d5d"
+				android:gravity="left"
+				android:textStyle="bold"
+				android:text="@string/strEnd" >
+			</TextView>
+			
+			<!-- End Time -->
+			<TextView
+				android:textIsSelectable="true"
+				android:id="@+id/endTime"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:textColor="#acacac" 
+				android:textStyle="bold"
+				android:gravity="left">
+			</TextView>
+		</LinearLayout>
+		
+		<!-- Linear layout for days of the week -->
+		<LinearLayout
+			android:layout_width="fill_parent"
+			android:layout_height="wrap_content"
+			android:orientation="horizontal">
+			
+			<!-- Days Label -->
+			<TextView
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:textColor="#5d5d5d"
+				android:gravity="left"
+				android:textStyle="bold"
+				android:text="@string/strDays" >
+			</TextView>
 
-</RelativeLayout>
+			<!-- Days -->
+			<TextView
+				android:textIsSelectable="true"
+				android:id="@+id/daysOfWeek"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:textColor="#acacac" 
+				android:textStyle="bold"
+				android:gravity="left">
+			</TextView>
+		</LinearLayout>
+</LinearLayout>

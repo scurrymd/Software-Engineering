@@ -85,8 +85,11 @@ public class JSONParser {
 
 	}
 	
-	//TODO: Move this method to this class and get it to work properly outside of an actvity class.
-	
+	/**
+	 * Gets a JSON object from a file in the \raw direcotry
+	 * @return JSONObject
+	 * @throws IOException
+	 */
 	public JSONObject getJSONFromFile() throws IOException
 	{
 		InputStream is = context.getResources().openRawResource(R.raw.schedule);
@@ -136,8 +139,7 @@ public class JSONParser {
 		}
 		return -1;
 	}
-	
-	//TODO: make private and create test cases
+
 	/**
 	 * Extracts the minute of a string showing time in the format of "hh:mma" time as an int.
 	 * @param time (a string in the form of "hh:mma" where h= hour, m = minute, and a = am or pm)
