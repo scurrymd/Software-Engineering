@@ -23,10 +23,10 @@ public class getSemesterStartDayTest extends TestCase {
 		assertEquals("Good Test Case is valid (not -1)", 26 ,testEvent.getSemesterStartDay("FS", 2013));
 		//fail("Not yet implemented");
 	}
-	public void testWinterTermType() {
+	public void testSpringTermType() {
 		Context context = null;
 		Event testEvent = new Event(context);
-		assertEquals("Good Test Case is valid (not -1)", 7 ,testEvent.getSemesterStartDay("WS", 2013));
+		assertEquals("Good Test Case is valid (not -1)", 7 ,testEvent.getSemesterStartDay("SS", 2013));
 		//fail("Not yet implemented");
 	}
 	public void testZeroTermYear() {
@@ -35,6 +35,4 @@ public class getSemesterStartDayTest extends TestCase {
 		assertEquals("Good Test Case is valid (not -1)", -1 ,testEvent.getSemesterStartDay("US",0));
 		//fail("Not yet implemented");
 	}
-
-
 }

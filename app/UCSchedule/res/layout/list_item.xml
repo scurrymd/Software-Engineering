@@ -13,9 +13,7 @@
 		android:layout_height="wrap_content"
 		android:textColor="#FF0033"
 		android:textSize="16sp"
-		android:textStyle="bold"
-		android:paddingTop="6dip"
-		android:paddingBottom="2dip" />
+		android:textStyle="bold" />
 	
 	<!-- Linear layout for start time -->
 	<LinearLayout

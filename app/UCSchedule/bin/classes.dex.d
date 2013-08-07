@@ -1,6 +1,7 @@
 C:\Users\Arthur - User\Documents\GitHub\Software-Engineering\app\UCSchedule\bin\classes.dex : \
 C:\Users\Arthur - User\Documents\GitHub\Software-Engineering\app\UCSchedule\bin\classes\com\example\ucschedule\BuildConfig.class \
 C:\Users\Arthur - User\Documents\GitHub\Software-Engineering\app\UCSchedule\bin\classes\com\example\ucschedule\Event.class \
+C:\Users\Arthur - User\Documents\GitHub\Software-Engineering\app\UCSchedule\bin\classes\com\example\ucschedule\FormatTime.class \
 C:\Users\Arthur - User\Documents\GitHub\Software-Engineering\app\UCSchedule\bin\classes\com\example\ucschedule\JSONParser.class \
 C:\Users\Arthur - User\Documents\GitHub\Software-Engineering\app\UCSchedule\bin\classes\com\example\ucschedule\LoginActivity$1.class \
 C:\Users\Arthur - User\Documents\GitHub\Software-Engineering\app\UCSchedule\bin\classes\com\example\ucschedule\LoginActivity.class \

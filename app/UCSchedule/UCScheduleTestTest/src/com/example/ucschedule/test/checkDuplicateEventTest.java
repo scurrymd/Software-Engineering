@@ -81,7 +81,7 @@ public class checkDuplicateEventTest extends TestCase {
 		Context contextEvent = null;
 		UCCalendar cal = new UCCalendar(context);
 		Event event = new Event(contextEvent);
-		event.addEvent(1, false, 2013, 05, 24, 5, 00, 2013, 05, 24, 5, 30, "American/New_York", "Testing Event Add","My House","Me");
+		event.addEvent(1, false, 2013, 05, 24, 5, 00, 2013, 05, 24, 5, 30, "American/New_York", "Testing Event Add","My House","Me", 14);
 		assertEquals("Good Test Case is valid (not -1)", 1 ,cal.CheckDuplicateEvent(1, 2013, 05, 24, 5, 0, 5, 30, "Testing Event Add"));
 		//fail("Not yet implemented");
 	}

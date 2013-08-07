@@ -14,25 +14,19 @@ public class getSemesterStartMonthTest extends TestCase {
 	public void testSummerTermCase() {
 		Context context = null;
 		Event testEvent = new Event(context);
-		assertEquals("Good Test Case is valid (not -1)", 4 ,testEvent.getSemesterStartMonth("US", 2013));
+		assertEquals("Good Test Case is valid (not -1)", 4 ,testEvent.getSemesterStartMonth("US"));
 		//fail("Not yet implemented");
 	}
 	public void testFallTermType() {
 		Context context = null;
 		Event testEvent = new Event(context);
-		assertEquals("Good Test Case is valid (not -1)", 7 ,testEvent.getSemesterStartMonth("FS", 2013));
+		assertEquals("Good Test Case is valid (not -1)", 7 ,testEvent.getSemesterStartMonth("FS"));
 		//fail("Not yet implemented");
 	}
-	public void testWinterTermType() {
+	public void testSpringTermType() {
 		Context context = null;
 		Event testEvent = new Event(context);
-		assertEquals("Good Test Case is valid (not -1)", 0 ,testEvent.getSemesterStartMonth("WS", 2013));
-		//fail("Not yet implemented");
-	}
-	public void testZeroTermYear() {
-		Context context = null;
-		Event testEvent = new Event(context);
-		assertEquals("Good Test Case is valid (not -1)", -1 ,testEvent.getSemesterStartMonth("US",0));
+		assertEquals("Good Test Case is valid (not -1)", 0 ,testEvent.getSemesterStartMonth("SS"));
 		//fail("Not yet implemented");
 	}
 }

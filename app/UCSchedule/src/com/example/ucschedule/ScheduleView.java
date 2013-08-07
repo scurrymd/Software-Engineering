@@ -84,6 +84,7 @@ public class ScheduleView extends ListActivity {
 					String tempTermYear;
 					int termYear = 0;
 					String termType = null;
+					int TERM_LENGTH = 14; //TODO: Vary this by specified course length. 
 					int YEAROFFSET = 2000;
 					int currentMonth = 06;
 					int currentDay = 0;
@@ -94,7 +95,7 @@ public class ScheduleView extends ListActivity {
 					termYear=termYear+YEAROFFSET;
 					termType = term.substring(term.length()/2);
 					startDay=event.getSemesterStartDay(termType,termYear);
-					currentMonth=event.getSemesterStartMonth(termType,termYear);
+					currentMonth=event.getSemesterStartMonth(termType);
 					
 					// Getting Array of Classes
 					schedule = json.getJSONArray(ScheduleTags.TAG_CLASS_INFO);
@@ -165,7 +166,7 @@ public class ScheduleView extends ListActivity {
 							if(calId == -1)
 							{
 								calId = cal.createUCCalendar();
-								event.addEvent(calId, false, termYear, currentMonth, currentDay, startTimeHourAsInt, startTimeMinuteAsInt, 0, 0, 0, endTimeHourAsInt, endTimeMinuteAsInt, null, title,location,professor);
+								event.addEvent(calId, false, termYear, currentMonth, currentDay, startTimeHourAsInt, startTimeMinuteAsInt, 0, 0, 0, endTimeHourAsInt, endTimeMinuteAsInt, null, title, location, professor, TERM_LENGTH);
 							}
 							else
 							{
@@ -173,7 +174,7 @@ public class ScheduleView extends ListActivity {
 								duplicateEvent=cal.CheckDuplicateEvent(calId,termYear,currentMonth,currentDay,startTimeHourAsInt,startTimeMinuteAsInt,endTimeHourAsInt,endTimeMinuteAsInt,title);
 								if(duplicateEvent==0)
 								{
-									event.addEvent(calId, false, termYear, currentMonth, currentDay, startTimeHourAsInt, startTimeMinuteAsInt, 0, 0, 0, endTimeHourAsInt, endTimeMinuteAsInt, null, title,location,professor);
+									event.addEvent(calId, false, termYear, currentMonth, currentDay, startTimeHourAsInt, startTimeMinuteAsInt, 0, 0, 0, endTimeHourAsInt, endTimeMinuteAsInt, null, title, location, professor, TERM_LENGTH);
 								}
 							}
 

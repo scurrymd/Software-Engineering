@@ -55,7 +55,8 @@ public class Event {
 			String timeZone, 
 			String title,
 			String location,
-			String professor)
+			String professor,
+			int termLength)
 	
 	{	
 		long eventId = 0;
@@ -104,7 +105,7 @@ public class Event {
 					values.put(Events.DESCRIPTION, 
 					      professor);
 					values.put(Events.ALL_DAY, 0);
-					values.put(Events.RRULE,"FREQ=WEEKLY;COUNT=14;");
+					values.put(Events.RRULE,"FREQ=WEEKLY;COUNT=" + termLength + ";");
 					
 					Uri uri1 = context.getContentResolver().insert(Events.CONTENT_URI, values);
 					
@@ -133,33 +134,32 @@ public class Event {
 	 */
 	public int getSemesterStartDay(String termType, int termYear)
 	{
-		int numMonday=1;
+		int numMonday = 1;
 		Calendar c = Calendar.getInstance();
-	    c.set( Calendar.YEAR, termYear );
+	    c.set( Calendar.YEAR, termYear);
 	    if(termType.equals("US"))
 	    {
-	    	c.set( Calendar.MONTH , Calendar.MAY);
+	    	c.set(Calendar.MONTH , Calendar.MAY);
 	    }
 	    else if(termType.equals("FS"))
 	    {
-	    	c.set( Calendar.MONTH , Calendar.AUGUST);
+	    	c.set(Calendar.MONTH , Calendar.AUGUST);
 	    	numMonday=4;
 	    }
-	    else	//else if(termType.equals("WS"))
+	    else if(termType.equals("SS"))
 	    {
-	    	c.set( Calendar.MONTH , Calendar.JANUARY);
+	    	c.set(Calendar.MONTH , Calendar.JANUARY);
 	    }
 	    
-	    c.set( Calendar.DAY_OF_MONTH, 0 );
-	    c.add( Calendar.DAY_OF_MONTH, -1 );
-
-	    System.out.println( c.getTime() );
+	    c.set(Calendar.DAY_OF_MONTH, 0);
 
 	    int mondaysCount = 0;
 
-	    while ( mondaysCount != numMonday ) {
-	        c.add( Calendar.DAY_OF_MONTH, 1 );
-	        if ( c.get( Calendar.DAY_OF_WEEK ) == Calendar.MONDAY ) {
+	    while (mondaysCount != numMonday) 
+	    {
+	        c.add(Calendar.DAY_OF_MONTH, 1);
+	        if (c.get( Calendar.DAY_OF_WEEK ) == Calendar.MONDAY)
+	        {
 	            mondaysCount++; 
 	        }       
 	    }
@@ -174,20 +174,20 @@ public class Event {
 	 * @param termYear
 	 * @return int startMonth
 	 */
-	public int getSemesterStartMonth(String termType,int termYear)
+	public int getSemesterStartMonth(String termType)
 	{
-		int startMonth=0;
+		int startMonth = 0;
 		if(termType.equals("US"))
 	    {
-	    	startMonth=04;
+	    	startMonth = 04;
 	    }
 	    else if(termType.equals("FS"))
 	    {
-	    	startMonth=07;
+	    	startMonth = 07;
 	    }
-	    else 	//else if(termType.equals("WS"))
+	    else if(termType.equals("SS"))
 	    {
-	    	startMonth=0;
+	    	startMonth = 00;
 	    }
 		
 		return startMonth;

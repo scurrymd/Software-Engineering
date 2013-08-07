@@ -20,7 +20,7 @@ public class UCCalendar {
     }
 	
 	//TODO: Get rid of this global.
-	private static final String MY_ACCOUNT_NAME = "arthur.n.johnson@gmail.com";
+	private static final String MY_ACCOUNT_NAME = "some.account@googlemail.com";
 	
 	/**
 	 * Checks for the UC Calendar ID of the default Android Calendar. This is required for the addEvent method
