@@ -13,6 +13,6 @@ Aug 1, 2013:
 • Updated Requirements and Specs documents
 • Added errata and user acceptance plan
 • Added UC term codes reference
-
+• We used a singleton design pattern in the ScheduleView class in order to pass context to other classes that do not extend activity.
 
 Comments:
