@@ -1,0 +1,18 @@
+UC Schedule:
+
+Aug 1, 2013:
+
+
+
+• Refactored our code to make it cleaner
+
+	- Removed MainActivity
+	- Minor fix ups
+
+• Fixed screen rotation bug
+• Updated Requirements and Specs documents
+• Added errata and user acceptance plan
+• Added UC term codes reference
+
+
+Comments:
