@@ -19,8 +19,7 @@
         android:layout_centerVertical="true"
         android:ems="10"
         android:hint="@string/strPassword"
-        android:inputType="textPassword"
-        android:text="test" >
+        android:inputType="textPassword" >
 
     </EditText>
 
@@ -48,8 +47,7 @@
         android:layout_marginBottom="23dp"
         android:ems="10"
         android:hint="@string/strUsername"
-        android:singleLine="true"
-        android:text="johns2au" >
+        android:singleLine="true" >
 
         <requestFocus />
  	</EditText>
